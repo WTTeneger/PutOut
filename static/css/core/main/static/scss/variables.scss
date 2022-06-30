@@ -1,0 +1,57 @@
+@import './partials/media-queries.scss';
+
+:root {
+  --app-color-green-1: #51e7cc;
+  --app-color-green-2: #3fd8bf;
+  --app-color-green-3: #256b61;
+  --app-color-green-4: #58c7b3;
+  --app-color-green-5: #31a895;
+  --app-color-green-6: #1f4e48;
+  --app-color-green-7: #249080;
+  --app-color-green-8: #218d7c;
+  --app-color-green-9: #5ce8ce;
+  --app-color-green-10: #64fdec;
+  --app-color-green-11: #14806e;
+  --app-color-green-12: #44dfc5;
+  --app-color-green-13: #37b1a0;
+
+  --app-color-yellow-1: #d9b74f;
+  --app-color-yellow-2: #f9d354;
+
+  --app-color-grey-1: #bcbcbc;
+  --app-color-grey-2: #949494;
+  --app-color-grey-3: #f0f0f0;
+  --app-color-grey-4: #353535;
+  --app-color-grey-5: #282828;
+  --app-color-grey-6: #868686;
+  --app-color-grey-7: #363636;
+  --app-color-grey-8: #b6b8b8;
+  --app-color-grey-9: #bebebe;
+  --app-color-grey-10: #dfdfdf;
+  --app-color-grey-11: #e6e6e6;
+  --app-color-grey-12: #eee;
+  --app-color-grey-13: #dcdcdc;
+  --app-color-grey-14: #e0e0e0;
+  --app-color-grey-15: #c0c0c0;
+  --app-color-grey-16: #818181;
+
+  --app-font-size-1: 15px;
+  --app-font-size-2: 16px;
+  --app-font-size-3: 18px;
+  --app-font-size-4: 21px;
+  --app-font-size-5: 25px;
+  --app-font-size-6: 35px;
+  --app-font-size-7: 42px;
+
+  --app-side-padding: 20px;
+  --app-account-aside-width: 300px;
+  --app-account-header-height: 90px;
+
+  @include media-xs {
+    --app-side-padding: 10px;
+  }
+
+  @include media-xs {
+    --app-account-aside-width: 250px;
+  }
+}

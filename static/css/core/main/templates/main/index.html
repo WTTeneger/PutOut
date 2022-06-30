@@ -1,0 +1,287 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    LuckyTrader
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="page">
+    <header class="page__header header">
+      <div class="header__top-bar top-bar">
+        <div class="top-bar__inner wrapper">
+          <a href="#" class="top-bar__logo">
+            <img src="{% static 'img/logo-type-2.png' %}" alt="Lucky Trade Logo">
+          </a>
+          <div class="top-bar__controls">
+            <div class="dropdown dropdown-lang" data-dropdown>
+              <button class="dropdown__btn" data-dropdown-btn>
+                {% get_current_language as LANGUAGE_CODE %}
+                {% trans 'Язык' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M0.0,0.947 L6.149,7.96 L12.298,0.947 L0.0,0.947 Z"/>
+                  </svg>
+              </button>
+                <div class="dropdown__drop">
+                    <ul class="dropdown-lang__langs">
+                      {% for lang in languages %}
+                      {{lag}}
+                        <li><a href="{% url 'addChangeLanguage' lang.0 %}">{% trans lang.1 %}</a></li>
+                      {% endfor %}
+                    </ul>
+                </div>
+            </div>
+              {% comment %} {% if user.is_authenticated %} {% endcomment %}
+              <button to-url="{% url 'sign-in' %}" class="btn-secondary">войти</button>
+              <button to-url="{% url 'sign-up' %}" class="btn-default">Начать</button>
+              {% comment %} {% endif %} {% endcomment %}
+          </div>
+          <button class="top-bar__btn-nav-toggle hamburger hamburger--spin" aria-label="Toggle navigation"
+            aria-expanded="false" aria-controls="top-bar-nav" type="button" data-btn-nav-toggle>
+            <span class="hamburger-box" aria-hidden="true">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+          <div class="top-bar__nav" id="top-bar-nav" data-nav>
+            <nav class="nav">
+              <ul class="nav__list">
+                <li class="nav__item">
+                  <a href="#" class="nav__link nav__link__max ">Инвесторам</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#" class="nav__link nav__link__max">Трейдерам</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#" class="nav__link nav__link__max">Тарифы</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#" class="nav__link nav__link__max">Поддержка</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="header__content">
+
+      </div>
+    </header>
+    <main class="page__main main">
+      <section class="section-about">
+        <div class="section-about__wrapper wrapper">
+          <div class="section-about__info-wrapper">
+            <h1 class="section-about__title">{% trans 'Автоматическое'%}
+              <span>
+                <br>{% trans 'копирование сделок' %}<br>
+              </span> {% trans 'на криптовалютных биржах' %}
+            </h1>
+            <p class="section-about__info">
+              {% trans 'Копитрейдинговый сервис LuckyTrade позволит Вам повторять' %} <br> 
+              {% trans 'сделки трейдеров и торговых роботов, а
+              также
+              получать сигналы от стратегий только с проверенной историей.' %}
+            </p>
+            <button to-url="{% url 'sign-up' %}" class="btn-default section-about__btn-start">
+              {% trans 'Запустить копитрейдинг' %}
+            </button>
+          </div>
+          <div class="section-about__bg">
+            <img src="{% static 'img/landing-bg.png' %}" alt="Alt">
+          </div>
+        </div>
+      </section>
+      <section class="section-speed">
+        <div class="section-speed__wrapper wrapper">
+          <div class="section-speed__speed-info speed-info">
+            <ul class="speed-info__list">
+              <li class="speed-info__item">
+                <div class="speed-info__item-inner">
+                  <h3 class="speed-info__title">{% trans 'Скорость' %}</h3>
+                  <p class="speed-info__text">{% trans 'Время на повторение сделки' %}</p>
+                  <p class="speed-info__value">&lt; 2 sec</p>
+                </div>
+              </li>
+              <li class="speed-info__item">
+                <div class="speed-info__item-inner">
+                  <h3 class="speed-info__title">{% trans 'Скорость' %}</h3>
+                  <p class="speed-info__text">{% trans 'Время на повторение сделки' %}</p>
+                  <p class="speed-info__value">98.5%</p>
+                </div>
+              </li>
+              <li class="speed-info__item">
+                <div class="speed-info__item-inner">
+                  <h3 class="speed-info__title">{% trans 'Скорость' %}</h3>
+                  <p class="speed-info__text">{% trans 'Время на повторение сделки' %}</p>
+                  <p class="speed-info__value">99.6%</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="section-features">
+        <div class="section-features__wrapper wrapper">
+          <div class="section-features__logo">
+            <img src="{% static 'img/logo-small.png' %}" alt="Lucky Trade Logo">
+          </div>
+          <h2 class="section-features__title">{% trans 'Основной продукт' %} <span>{% trans 'для инвесторов' %}</span></h2>
+          <p class="section-features__info">
+            {% trans 'Наша платформа формирует уникальные возможности для прироста капитала, вобрав лучшее из мира криптовалют и
+            инвестиций.' %}
+          </p>
+          <div class="section-features__features-wrapper">
+            <ul class="section-features__features-list features-list">
+              <li class="features-list__item">
+                <div class="features-list__item-inner">
+                  <img src="{% static 'img/features/icon1.png' %}" alt="Alt" class="features-list__img">
+                  <div class="features-list__info">
+                    <h3 class="features-list__title">{% trans 'Пасивный доход' %} 2.0</h3>
+                    <p class="features-list__text">
+                      {% trans 'Получайте доходы активного криптотрейдинга без участия в торговле' %}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="features-list__item">
+                <div class="features-list__item-inner">
+                  <img src="{% static 'img/features/icon2.png' %}" alt="Alt" class="features-list__img">
+                  <div class="features-list__info">
+                    <h3 class="features-list__title">{% trans 'Диверсификация' %}</h3>
+                    <p class="features-list__text">
+                      {% trans 'Распределяйте активы между трейдерами с разными стратегиями' %}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="features-list__item">
+                <div class="features-list__item-inner">
+                  <img src="{% static 'img/features/icon3.png' %}" alt="Alt" class="features-list__img">
+                  <div class="features-list__info">
+                    <h3 class="features-list__title">{% trans 'Управление рисками' %}</h3>
+                    <p class="features-list__text">
+                      {% trans 'Устанавливайте уровни допустимого риска к выбранным стратегиям' %}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="features-list__item">
+                <div class="features-list__item-inner">
+                  <img src="{% static 'img/features/icon4.png' %}" alt="Alt" class="features-list__img">
+                  <div class="features-list__info">
+                    <h3 class="features-list__title">{% trans 'Абсолютная безопасность' %}</h3>
+                    <p class="features-list__text">
+                      {% trans 'Сервис работает без прямого доступа к биржевому аккаунту и средствам' %}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="features-list__item">
+                <div class="features-list__item-inner">
+                  <img src="{% static 'img/features/icon5.png' %}" alt="Alt" class="features-list__img">
+                  <div class="features-list__info">
+                    <h3 class="features-list__title">{% trans 'Синхронизация портфеля' %}</h3>
+                    <p class="features-list__text">
+                      {% trans 'Выравнивайте активы с аккаунтом трейдера в 1 клик' %}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="features-list__item">
+                <div class="features-list__item-inner">
+                  <img src="{% static 'img/features/icon6.png' %}" alt="Alt" class="features-list__img">
+                  <div class="features-list__info">
+                    <h3 class="features-list__title">{% trans 'Принцип одной лодки' %}</h3>
+                    <p class="features-list__text">
+                      {% trans 'Трейдер, формируя сделки для копирования, рискует своими средствами' %}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="section-steps">
+        <div class="section-steps__wrapper wrapper">
+          <h2 class="section-steps_title">{% trans 'Чтобы начать - нужно' %} <span>{% trans 'всего 3 шага' %}</span></h2>
+          <div class="section-steps__steps-wrapper">
+            <ul class="section-steps__steps-list steps-list">
+              <li class="steps-list__item">
+                <div class="steps-list__item-inner">
+                  <div class="steps-list__img">
+                    <img src="{% static 'img/steps/step1.png' %}" alt="Alt">
+                  </div>
+                  <div class="steps-list__info">
+                    <p class="steps-list__number">1</p>
+                    <h3 class="steps-list__title">{% trans 'Подключите биржевой аккаунт' %}</h3>
+                  </div>
+                </div>
+              </li>
+              <li class="steps-list__item">
+                <div class="steps-list__item-inner">
+                  <div class="steps-list__img">
+                    <img src="{% static 'img/steps/step2.png' %}" alt="Alt">
+                  </div>
+                  <div class="steps-list__info">
+                    <p class="steps-list__number">2</p>
+                    <h3 class="steps-list__title">{% trans 'Выберите стратегию для копирования' %}</h3>
+                  </div>
+                </div>
+              </li>
+              <li class="steps-list__item">
+                <div class="steps-list__item-inner">
+                  <div class="steps-list__img">
+                    <img src="{% static 'img/steps/step3.png' %}" alt="Alt">
+                  </div>
+                  <div class="steps-list__info">
+                    <p class="steps-list__number">3</p>
+                    <h3 class="steps-list__title">{% trans 'Отслеживайте изменения на счету' %}</h3>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="section-integrations">
+        <div class="section-integrations__wrapper wrapper">
+          <h2 class="section-integrations__title">{% trans 'Список поддерживаемых интеграций' %}</h2>
+          <div class="section-integrations__integrations-list-wrapper integrations-list">
+            <ul class="integrations-list__list">
+              <li class="integrations-list__item">
+                <div class="integrations-list__logo">
+                  <img src="{% static 'img/integrations/binance.png' %}" alt="Binance logo" class="integrations-list__logo">
+                </div>
+                <p class="integrations-list__text">Spot and Futures</p>
+              </li>
+              <li class="integrations-list__item">
+                <div class="integrations-list__logo">
+                  <img src="{% static 'img/integrations/binance.png' %}" alt="Binance logo" class="integrations-list__logo">
+                </div>
+                <p class="integrations-list__text">Spot and Futures</p>
+              </li>
+              <li class="integrations-list__item">
+                <div class="integrations-list__logo">
+                  <img src="{% static 'img/integrations/binance.png' %}" alt="Binance logo" class="integrations-list__logo">
+                </div>
+                <p class="integrations-list__text">Spot and Futures</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="page__footer footer">
+      <div class="footer__wrapper wrapper">
+
+      </div>
+    </footer>
+  </div>
+{% endblock %}

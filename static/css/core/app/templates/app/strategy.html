@@ -1,0 +1,624 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/general-page.css' %}" type="text/css">
+<script src="{% static '/js/tblock.js' %}"></script>
+<link href="{% static 'css/catalog-page.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main">
+    <section class="section-catalog-info">
+        <div class="section-catalog-info__logo">
+            <img src="{% static 'img/logo/logo-small.svg' %}" alt="Lucky Trade Logo">
+        </div>
+        <div class="section-catalog-info__info">
+            <h1 class="section-catalog-info__title">{% translate "Копитрейдинг" %}</h1>
+            <p class="section-catalog-info__text">{% translate "Следуйте стратегии, чтобы начать копировать ее сделки." %}</p>
+        </div>
+    </section>
+    <section class="section-top-strategies">
+        <h2 class="section-top-strategies__title">{% translate "Лучшие стратегии" %}</h2>
+        <div class="section-top-strategies__top-strategies-wrapper">
+            <ul class="section-top-strategies__top-strategies top-strategies">
+                <li class="top-strategies__item">
+                    <p class="top-strategies__verification">{% trans "Верифицированный трейдер" %}</p>
+                    <h3 class="top-strategies__title">
+                        <img src="{% static 'img/icons/checkmark-2.svg' %}" alt="Checkmark Icon">
+                        Daddy Trading
+                    </h3>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Биржа" %}</p>
+                            <p class="top-strategies__info-value">
+                                <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                                BINANCE
+                            </p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Базовая монета" %}</p>
+                            <p class="top-strategies__info-value">
+                                <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                                USDT
+                            </p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Общая прибыль" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">+261.00%</p>
+                        </li>
+                    </ul>
+                    <div class="top-strategies__chart" data-chart-top-strategies></div>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Риски" %}</p>
+                            <p class="top-strategies__info-value">2.1</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Тип" %}</p>
+                            <p class="top-strategies__info-value">Spot</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Рейтинг" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">
+                                <img src="{% static 'img/icons/crown.png' %}" alt="Crown">
+                                8.9
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="top-strategies__item">
+                    <p class="top-strategies__verification">{% trans "Верифицированный трейдер" %}</p>
+                    <h3 class="top-strategies__title">
+                        <img src="{% static 'img/icons/checkmark-2.svg' %}" alt="Checkmark Icon">
+                        Daddy Trading
+                    </h3>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Обмен" %}</p>
+                            <p class="top-strategies__info-value">
+                                <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                                BINANCE
+                            </p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Базовая монета" %}</p>
+                            <p class="top-strategies__info-value">
+                                <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                                USDT
+                            </p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Общая прибыль" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">+261.00%</p>
+                        </li>
+                    </ul>
+                    <div class="top-strategies__chart" data-chart-top-strategies></div>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Риски" %}</p>
+                            <p class="top-strategies__info-value">2.1</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Тип" %}</p>
+                            <p class="top-strategies__info-value">Spot</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Рейтинг" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">
+                                <img src="{% static 'img/icons/crown.png' %}" alt="Crown">
+                                8.9
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="top-strategies__item">
+                    <p class="top-strategies__verification">{% trans "Верифицированный трейдер" %}</p>
+                    <h3 class="top-strategies__title">
+                        <img src="{% static 'img/icons/checkmark-2.svg' %}" alt="Checkmark Icon">
+                        Daddy Trading
+                    </h3>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Обмен" %}</p>
+                            <p class="top-strategies__info-value">
+                                <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                                BINANCE
+                            </p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Базовая монета" %}</p>
+                            <p class="top-strategies__info-value">
+                                <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                                USDT
+                            </p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Общая прибыль" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">+261.00%</p>
+                        </li>
+                    </ul>
+                    <div class="top-strategies__chart" data-chart-top-strategies></div>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Риски" %}</p>
+                            <p class="top-strategies__info-value">2.1</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Тип" %}</p>
+                            <p class="top-strategies__info-value">Spot</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Рейтинг" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">
+                                <img src="{% static 'img/icons/crown.png' %}" alt="Crown">
+                                8.9
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section-all-strategies">
+        <div class="section-all-strategies__header">
+            <h2 class="section-all-strategies__title">All Strategies</h2>
+            <div class="section-all-strategies__filters-wrapper">
+                <ul class="section-all-strategies__filters-list">
+                    <li class="section-all-strategies__filter">
+                        <label for="select-sorting-order">Sorting Order</label>
+                        <div class="custom-select">
+                            <select name="select" class="custom-select__select-default" id="select-sorting-order">
+                                <option value="value1">Most signals first</option>
+                                <option value="value2">1</option>
+                                <option value="value2">2</option>
+                                <option value="value2">3</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 class="custom-select__arrow">
+                                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li class="section-all-strategies__filter">
+                        <label for="select-exchange">{% translate "Обмен" %}</label>
+                        <div class="custom-select">
+                            <select name="select" class="custom-select__select-default" id="select-exchange">
+                                <option value="value1">All</option>
+                                <option value="value2">1</option>
+                                <option value="value2">2</option>
+                                <option value="value2">3</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 class="custom-select__arrow">
+                                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li class="section-all-strategies__filter">
+                        <label for="select-type">{% translate "Тип" %}</label>
+                        <div class="custom-select">
+                            <select name="select" class="custom-select__select-default" id="select-type">
+                                <option value="value1">All types</option>
+                                <option value="value2">1</option>
+                                <option value="value2">2</option>
+                                <option value="value2">3</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 class="custom-select__arrow">
+                                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li class="section-all-strategies__filter">
+                        <label for="select-strategies-per-page">Strategies per page</label>
+                        <div class="custom-select">
+                            <select name="select" class="custom-select__select-default" id="select-strategies-per-page">
+                                <option value="value1">10</option>
+                                <option value="value2">1</option>
+                                <option value="value2">2</option>
+                                <option value="value2">3</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 class="custom-select__arrow">
+                                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li class="section-all-strategies__filter">
+                        <label for="select-period">Period</label>
+                        <div class="custom-select">
+                            <select name="select" class="custom-select__select-default" id="select-period">
+                                <option value="value1">3 Months</option>
+                                <option value="value2">1</option>
+                                <option value="value2">2</option>
+                                <option value="value2">3</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 class="custom-select__arrow">
+                                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section-all-strategies__table-wrapper">
+            <table class="section-all-strategies__table-strategies table-strategies">
+                <thead>
+                <tr>
+                    <td>{% translate "Стратегия" %}</td>
+<!--                    <td>{% translate "Рейтинг" %}</td>-->
+                    <td>{% translate "Биржа" %}</td>
+                    <td>{% translate "Тип" %}</td>
+                    <td>{% translate "Основная монета" %}</td>
+                    <td>{% translate "Риски" %}</td>
+                    <td>{% translate "Колличество сделок(Месяц)" %}</td>
+                    <td>{% translate "Процент верных" %}</td>
+                    <td>{% translate "Рост/Падение" %}</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for el in strategyes %}
+                    <tr>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark Icon">
+                            {{ el.title }}
+                        </div>
+                    </td>
+<!--                    <td class="table-strategies__color-green table-strategies__value">{{ el.price }}</td>-->
+                    <td>
+                        <div>
+                            {% if el.platforms.place == "Binance" %}
+                            <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                            {{el.platforms.place|upper}}
+                            {%else%}
+                            <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                            {{el.platforms.place|upper}}
+                            {%endif%}
+                        </div>
+                    </td>
+<!--                    <td>{{el.type}}</td>-->
+                    <td>{{el.type}}</td>
+                    <td>{{el.stats.main_symbol}}</td>
+                    <td>{{el.stats.risk}}%</td>
+                    <td>{{el.stats.month_count}}</td>
+                    <td>{{el.stats.count_true_ROE}}</td>
+                    <td class="table-strategies__cell-chart">
+                        <div>
+                            {{el.stats.month_ROE}}%
+                            <div orders="{{el.stats.all_ROE}}" data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% comment %}
+                <tr>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark Icon">
+                            ALBERT-TRADER TETHERON
+                        </div>
+                    </td>
+                    <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                            BINANCE
+                        </div>
+                    </td>
+                    <td>Spot</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                            USDT
+                        </div>
+                    </td>
+                    <td>1364 USDT</td>
+                    <td>2.2</td>
+                    <td>140.00 USDT</td>
+                    <td>140.00 USDT</td>
+                    <td class="table-strategies__cell-chart">
+                        <div>
+                            10.1%
+                            <div data-chart-all-strategies="red" class="table-strategies__chart"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark Icon">
+                            ALBERT-TRADER TETHERON
+                        </div>
+                    </td>
+                    <td class="table-strategies__color-yellow table-strategies__value">9.1</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                            BINANCE
+                        </div>
+                    </td>
+                    <td>Spot</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                            USDT
+                        </div>
+                    </td>
+                    <td>1364 USDT</td>
+                    <td>2.2</td>
+                    <td>140.00 USDT</td>
+                    <td>140.00 USDT</td>
+                    <td class="table-strategies__cell-chart">
+                        <div>
+                            10.1%
+                            <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark Icon">
+                            ALBERT-TRADER TETHERON
+                        </div>
+                    </td>
+                    <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                            BINANCE
+                        </div>
+                    </td>
+                    <td>Spot</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                            USDT
+                        </div>
+                    </td>
+                    <td>1364 USDT</td>
+                    <td>2.2</td>
+                    <td>140.00 USDT</td>
+                    <td>140.00 USDT</td>
+                    <td class="table-strategies__cell-chart">
+                        <div>
+                            10.1%
+                            <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark Icon">
+                            ALBERT-TRADER TETHERON
+                        </div>
+                    </td>
+                    <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                            BINANCE
+                        </div>
+                    </td>
+                    <td>Spot</td>
+                    <td>
+                        <div>
+                            <img src="{% static 'img/icons/usdt.svg' %}" alt="USDT logo">
+                            USDT
+                        </div>
+                    </td>
+                    <td>1364 USDT</td>
+                    <td>2.2</td>
+                    <td>140.00 USDT</td>
+                    <td>140.00 USDT</td>
+                    <td class="table-strategies__cell-chart">
+                        <div>
+                            10.1%
+                            <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                        </div>
+                    </td>
+                </tr>
+                {% endcomment %}
+                </tbody>
+            </table>
+        </div>
+        <div class="section-all-strategies__pagination-wrapper">
+            <div class="section-all-strategies__pagination">
+                <button aria-label="Previous strategies table page">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.93,0.624 L0.366,7.352 L7.93,14.79 L7.93,0.624 Z" />
+                    </svg>
+                </button>
+                <p>1-5 of 77</p>
+                <button aria-label="Next strategies table page">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M0.593,0.493 L7.321,7.221 L0.593,13.948 L0.593,0.493 Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    // Top strategies charts
+    (() => {
+        const data = [
+            [4, 6, 5, 6, 1, 5, 9, 8, 19],
+            [4, 4, 6, 3, 6, 7, 2, 4, 6],
+            [4, 5, 7, 1, 5, 3, 7, 4, 4]
+        ];
+
+        const chartConfig = {
+            chart: {
+                height: 160,
+                type: 'line',
+                parentHeightOffset: 0,
+                toolbar: {
+                    show: false
+                },
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                width: 2
+            },
+            dataLabels: {
+                enabled: false
+            },
+            colors: ['#64fdec'],
+            grid: {
+                show: false,
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: -10
+                }
+            },
+            tooltip: {
+                enabled: false
+            },
+            xaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+            }
+        };
+
+        const chartsTopStrategies = document.querySelectorAll('[data-chart-top-strategies]');
+
+        chartsTopStrategies.forEach((chart, i) => {
+            new ApexCharts(chart, {
+                ...chartConfig,
+                series: [{
+                    data: data[i]
+                }]
+            }).render();
+        })
+    })();
+
+    // All strategies charts
+    (() => {
+        const data = []
+        for (el of document.getElementsByClassName('table-strategies__chart')) {
+            orders = el.getAttribute('orders').replace('[', '').replace(']', '').split(', ')
+            data.push(orders)
+        }
+        const chartConfig = {
+            chart: {
+                height: 80,
+                type: 'line',
+                parentHeightOffset: 0,
+                toolbar: {
+                    show: false
+                },
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                width: 2
+            },
+            dataLabels: {
+                enabled: false
+            },
+            grid: {
+                show: false,
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: -10
+                }
+            },
+            tooltip: {
+                enabled: false
+            },
+            xaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+            }
+        };
+
+        const chartsTopStrategies = document.querySelectorAll('[data-chart-all-strategies]');
+
+        chartsTopStrategies.forEach((chart, i) => {
+            if (chart.dataset.chartAllStrategies === 'green') {
+                chartConfig.colors = ['#64fdec'];
+            }
+
+            if (chart.dataset.chartAllStrategies === 'red') {
+                chartConfig.colors = ['#fd6464'];
+            }
+
+            new ApexCharts(chart, {
+                ...chartConfig,
+                series: [{
+                    data: data[i]
+                }]
+            }).render();
+        })
+    })();
+
+</script>
+{% endblock %}

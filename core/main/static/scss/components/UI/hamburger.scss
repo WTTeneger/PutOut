@@ -1,0 +1,100 @@
+.hamburger {
+  $hamburgerWidth: 30px;
+  $hamburgerHeight: 24px;
+
+  width: $hamburgerWidth;
+  height: $hamburgerHeight;
+  background-color: transparent;
+
+  &:hover {
+    .hamburger-inner {
+      background-color: var(--app-color-green-13);
+
+      &::before,
+      &::after {
+        background-color: var(--app-color-green-13);
+      }
+    }
+  }
+
+  .hamburger-box {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+  }
+
+  .hamburger-inner {
+    width: 100%;
+    height: 4px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -2px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform .15s ease, background-color .3s ease-in-out;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 100%;
+      height: 4px;
+      display: block;
+      position: absolute;
+      border-radius: 10px;
+      background-color: #fff;
+      transition: transform .15s ease, background-color .3s ease-in-out;
+    }
+
+    &::before {
+      top: calc(($hamburgerHeight / 2 - 2px) * -1);
+    }
+
+    &::after {
+      bottom: calc(($hamburgerHeight / 2 - 2px) * -1);
+    }
+  }
+
+  &_type2 {
+    .hamburger-inner {
+      background-color: var(--app-color-grey-16);
+
+      &::before,
+      &::after {
+        background-color: var(--app-color-grey-16);
+      }
+    }
+  }
+}
+
+// Animation Spin
+.hamburger--spin .hamburger-inner {
+  transition-duration: 0.22s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger--spin .hamburger-inner::before {
+  transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in, background-color .3s ease-in-out;
+}
+
+.hamburger--spin .hamburger-inner::after {
+  transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color .3s ease-in-out;
+}
+
+.hamburger--spin.is-active .hamburger-inner {
+  transform: rotate(225deg);
+  transition: transform .22s .12s cubic-bezier(0.215, 0.61, 0.355, 1), background-color .3s ease-in-out;
+}
+
+.hamburger--spin.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+  transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out, background-color .3s ease-in-out;
+}
+
+.hamburger--spin.is-active .hamburger-inner::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+  transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1), background-color .3s ease-in-out;
+}

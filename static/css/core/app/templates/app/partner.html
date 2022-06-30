@@ -1,0 +1,92 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load tag_library %}
+
+{% block title %}
+    LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/welcome-page.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/partner-page.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <main class="page-account__main partner-page-main">
+      <div class="partner-page-main__inner">
+        <a href="{% url 'appDashboard' %}" class=" partner-page-main__btn-back btn-back">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path fill-rule="evenodd" d="M9.499,0.499 L0.499,9.499 L9.499,18.499 L9.499,0.499 Z" />
+          </svg>
+          {% translate "Назад" %}
+        </a>
+        <section class="section-partner-info partner-page-main__section-partner-info">
+          <div class="section-partner-info__info">
+            <h1 class="section-partner-info__title">
+              <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark icon">
+              {{user.email}}
+            </h1>
+            <p class="section-partner-info__text">
+              {% blocktranslate %}
+              Top trader with great experience. Technical analysis and strick risk management. 2+ years on Coinmatics from 07.2019, more that 1000% profit.
+              {% endblocktranslate %}
+            </p>
+          </div>
+          <div class="section-partner-info__partner-link partner-link">
+            <div class="partner-link__inner">
+              <h2 class="partner-link__title">{% translate "Моя персональная ссылка" %}</h2>
+              <a href="#" copy-text="referal-url" class="partner-link__link">
+                {{host}}/referral/{{referral_key.referral_code}}
+                <div id='referal-url' style="display: none">https://{{host}}/referral/{{referral_key.referral_code}}</div>
+              </a>
+              <div class="partner-link__btns">
+                <button copy-text="referal-url" class="btn-default">{% translate "Копировать" %}</button>
+                <button class="btn-default">{% translate "Поделиться" %}</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-table partner-page-main__partners-list">
+          <div class="section-table__inner">
+            <h2 class="section-table__title">{% translate "История партнеров" %}</h2>
+            <div class="section-table__table-wrapper">
+              <table class="section-table__table-default table-default">
+                <thead>
+                  <tr>
+                    <td>{% translate "Дата" %}</td>
+                    <td>{% translate "Партнёр" %} ID</td>
+                    <td>{% translate "Линия" %}</td>
+                    <td>{% translate "Описание" %}</td>
+                    <td>{% translate "Прибыль" %}</td>
+                  </tr>
+                </thead>
+                <tbody>
+                {% comment %}
+                  <tr>
+                    <td>29 Apr 2022 12:02</td>
+                    <td>ID 56749420</td>
+                    <td>ID 56749420</td>
+                    <td>3</td>
+                    <td class="table-default__text-green">+ 106.86 USDT</td>
+                  </tr>
+                {% endcomment %}
+                  {% for el in referral_data %}
+                  <tr>
+                    <td>{{el.data}}</td>
+                    <td>ID {{el.partner_id}}</td>
+                    <td>{{el.line}}</td>
+                    <td>{{el.descriptions}}</td>
+                    <td class="table-default__text-green">+ {{el.result|addf:0}} USD</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <a href="#" class="section-table__link-all-history">{% translate "Посмотреть всех партнеров" %}</a>
+          </div>
+        </section>
+      </div>
+    </main>
+<script src="{% static 'js/tblock.js' %}"></script>
+{% endblock %}

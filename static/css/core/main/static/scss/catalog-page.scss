@@ -1,0 +1,15 @@
+@import './partials/base.scss';
+@import './components/account-aside.scss';
+@import './components/account-header.scss';
+@import './components/UI/hamburger.scss';
+@import './components/UI/dropdown.scss';
+@import './components/UI/custom-select.scss';
+@import './components/sections/section-catalog-info.scss';
+@import './components/sections/section-top-strategies.scss';
+@import './components/sections/section-all-strategies.scss';
+@import './components/table-strategies.scss';
+
+.page-account__main {
+  padding: 0;
+  background-color: var(--app-color-grey-3);
+}

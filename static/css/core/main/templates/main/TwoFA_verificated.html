@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    LuckyTrader - {% translate "Верификация" %}
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/sign-in.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<main class="page-sign-in">
+    <section class="page-sign-in__sign-in-wrapper sign-in-wrapper">
+      <img to-url="{% url 'index' %}" src="{% static 'img/logo.png' %}" alt="Logo LuckyTrade" class="sign-in-wrapper__logo">
+      <h1 class="sign-in-wrapper__title">
+        {% trans "Проверка безопасности" %}
+      </h1>
+      <p class="sign-in-wrapper__text">
+        {% translate "Для защиты аккаунта выполните следующую проверку." %}
+      </p>
+      <form action="{% url 'verificated' %}" method="post" class="sign-in-wrapper__sign-in-form sign-in-form">
+        {% csrf_token %}
+        {% if form.errors %}
+          <div style="color: red;" id="errors">
+            {% for error in form.non_field_errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+          <br/>
+          {% comment %} TODO: доделать вывод ошибок {% endcomment %}
+        {% endif %}
+        {{ form.code_from_2FA }}
+        <br/>
+        <button type="submit" class="btn-default sign-in-form__btn-sign-in">{% translate "Вход" %}</button>
+      </form>
+
+    </section>
+    <div class="page-sign-in__bg">
+      <img src="{% static 'img/sign-in-bg.png' %}" alt="Alt" class="page-sign-in__bg">
+    </div>
+</main>
+{% endblock %}

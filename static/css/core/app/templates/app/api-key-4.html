@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyTrade</title>
+  <link rel="icon" href="./favicon.ico">
+  <link href="./assets/css/variables.css" rel="stylesheet">
+  <link href="./assets/css/general-page.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="page-account">
+    <aside class="page-account__aside account-aside" id="account-aside" data-aside>
+      <a href="#" class="account-aside__logo">
+        <img src="./assets/img/logo/logo.svg" alt="Lucky Trade Logo">
+      </a>
+      <nav class="account-aside__nav aside-nav">
+        <ul class="aside-nav__list">
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link aside-nav__link_active">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="22.5px" height="21.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.882,1.488 L14.284,1.488 L14.284,13.413 L1.882,13.413 L1.882,1.488 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M7.882,7.488 L20.283,7.488 L20.283,19.413 L7.882,19.413 L7.882,7.488 Z" />
+              </svg>
+              Courses
+            </a>
+          </li>
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="19.5px" height="19.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z" />
+              </svg>
+              Copy Trading
+            </a>
+          </li>
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="20.5px" height="19.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,1.647 L18.277,1.647 L18.277,5.76 L1.134,5.76 L1.134,1.647 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,7.647 L18.277,7.647 L18.277,11.76 L1.134,11.76 L1.134,7.647 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,13.647 L18.277,13.647 L18.277,17.76 L1.134,17.76 L1.134,13.647 Z" />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <header class="page-account__header account-header">
+      <button class="account-header__btn-nav-toggle hamburger hamburger_type2" aria-label="Toggle aside"
+        aria-expanded="false" aria-controls="account-aside" type="button" data-btn-aside-toggle>
+        <span class="hamburger-box" aria-hidden="true">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <div class="account-header__balance user-balance">
+        <p class="user-balance__label">LuckyTrade Balance</p>
+        <p class="user-balance__value">137.026 USD</p>
+      </div>
+      <div class="dropdown account-header__dropdown-user dropdown-user" data-dropdown>
+        <button class="dropdown__btn" data-dropdown-btn>
+          <div class="dropdown-user__photo">
+            <img src="./assets/img/user.png" alt="User Photo">
+          </div>
+          <span class="dropdown-user__name">UserName661</span>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+            <path fill-rule="evenodd" d="M0.0,0.947 L6.149,7.96 L12.298,0.947 L0.0,0.947 Z" />
+          </svg>
+        </button>
+        <div class="dropdown__drop">
+          <ul class="dropdown-user__links">
+            <li><a href="#">Настройки</a></li>
+            <li><a href="#">Выйти</a></li>
+            <li><a href="#">...</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="page-account__main api-key-page-main">
+      <div class="d-api-key">
+        <div class="container-account d-api-key__container">
+          <div class="d-api-key__inner">
+            <form action="#" class="d-api-key__form">
+              <a href="#" class="prev-page-link d-api-key__prev-page-link">
+                <span class="prev-page-link__icon"></span>
+                <span class="prev-page-link__title">Назад в Аккаунты</span>
+              </a>
+              <h1 class="d-api-key__title">Добавление API-ключа от Binance</h1>
+              <ul class="step-list d-api-key__step-list">
+                <li class="step-list__card">Создание аккаунта</li>
+                <li class="step-list__card">Создание API-ключа</li>
+                <li class="step-list__card is-active">Ввод деталей</li>
+              </ul>
+              <div class="input-user-pass d-api-key__form-line u-width-100">
+                <div class="input-user-pass__header">
+                  <label for="name-integration">Назовите вашу интеграцию</label>
+                </div>
+                <div class="input-user-pass__input-wrapper">
+                  <input class="input-text-default" type="text" name="name-integration" id="name-integration" placeholder="">
+                </div>
+              </div>
+              <div class="input-user-pass d-api-key__form-line u-width-100">
+                <div class="input-user-pass__header">
+                  <label for="api-key">API-ключ</label>
+                </div>
+                <div class="input-user-pass__input-wrapper">
+                  <input class="input-text-default" type="password" name="api-key" id="api-key" placeholder=""
+                    data-input-pass="10">
+                  <button data-btn-pass="10" aria-label="Toggle password visibility">
+                    <svg class="input-user-pass__svg-show-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32" aria-hidden="true">
+                      <path
+                        d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                      </path>
+                    </svg>
+                    <svg class="input-user-pass__svg-hide-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32" aria-hidden="true">
+                      <path
+                        d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                      </path>
+                      <path
+                        d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                      </path>
+                      <path
+                        d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="input-user-pass d-api-key__form-line u-width-100">
+                <div class="input-user-pass__header">
+                  <label for="secter-key">Cекретный ключ</label>
+                </div>
+                <div class="input-user-pass__input-wrapper">
+                  <input class="input-text-default" type="password" name="secter-key" id="secter-key" placeholder=""
+                    data-input-pass="10">
+                  <button data-btn-pass="10" aria-label="Toggle password visibility">
+                    <svg class="input-user-pass__svg-show-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32" aria-hidden="true">
+                      <path
+                        d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                      </path>
+                    </svg>
+                    <svg class="input-user-pass__svg-hide-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32" aria-hidden="true">
+                      <path
+                        d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                      </path>
+                      <path
+                        d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                      </path>
+                      <path
+                        d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="btn-groups d-api-key__form-group-btn">
+                <button type="button" class="btn-secondary btn-groups__item">Назад</button>
+                <button type="button" class="btn-default btn-groups__item">Далее</button>
+                <a data-micromodal-trigger="modal-wrong-key">Popap</a>
+              </div>
+            </form>
+            <div class="d-api-key__aside">
+              <div class="card-info d-api-key__aside-card-info">
+                <h3 class="card-info__title">Секретный ключ</h3>
+                <div class="card-info__description">
+                  <p>Секретный ключ отображается только один раз — во время создания API-ключа.</p>
+                  <p>Сохраните себе его данные, чтобы использовать этот API-ключ в дальнейшем.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal micromodal-slide" id="modal-wrong-key" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="m-modal modal__container" role="dialog" aria-modal="true">
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        <div class="m-modal__body">
+          <div class="m-modal__trade">
+            <div class="m-modal__title">Неверные данные</div>
+            <div class="m-modal__description">Не удалось привязать аккаунт. Перепроверьте данные и введите их еще раз.</div>
+            <button class="btn-default m-modal__btn-trade" data-micromodal-close>Понятно</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/micromodal.min.js"></script>
+  <script src="./assets/js/account.js"></script>
+</body>
+
+</html>

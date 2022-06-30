@@ -1,0 +1,235 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load staticfiles %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/general-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main general-page-main">
+      <div class="container-account">
+        <div class="d-dashboard">
+          <div class="d-dashboard__header">
+            <picture class="d-dashboard__header-logo">
+              <img src="{% static 'img/logo/logo-small.svg' %}" alt="Добро пожаловать в LuckyTrade!">
+            </picture>
+            <div class="d-dashboard__header-content">
+                <h1 class="d-dashboard__header-title">
+                    {% blocktranslate %}
+                    Добро пожаловать в LuckyTrade!
+                    {% endblocktranslate %}
+                </h1>
+                <div class="d-dashboard__header-description">
+                    {% blocktranslate %}
+                    Благодаря LuckyTrade опытные трейдеры зарабатывают на своей экспертизе, а новички – на копировании
+                    сделок успешных трейдеров.
+                    {% endblocktranslate %}
+                </div>
+            </div>
+          </div>
+            <div class="d-dashboard__subtitle">{% blocktranslate %}Как начать копировать сделки{% endblocktranslate %}
+            </div>
+            <div class="row d-dashboard__list">
+                <div class="col-4 d-dashboard__list-col">
+                    <div class="d-dashboard-step-card d-dashboard__list-card">
+                        <div class="d-dashboard-step-card__step">{% trans 'Шаг' %} 1</div>
+                        <picture class="d-dashboard-step-card__picture">
+                            <img src="{% static 'img/steps/step1.svg' %}" alt="Подключите свой биржевой аккаунт">
+                        </picture>
+                        <div class="d-dashboard-step-card__inner">
+                            <div class="d-dashboard-step-card__content">
+                                <h3 class="d-dashboard-step-card__title">{% blocktranslate %}Подключите свой биржевой
+                                    аккаунт{% endblocktranslate %}</h3>
+                                <div class="d-dashboard-step-card__description">
+                                    {% blocktranslate %}
+                                    Подключите свой биржевой аккаунт к платформе Coinmatics.
+                                    На данный момент наш сервис поддерживает биржи Binance.
+                                    {% endblocktranslate %}
+                                </div>
+                            </div>
+                            <button to-url="{% url 'appAccounts' %}" type="button"
+                                    class="btn-default d-dashboard-step-card__btn">
+                                {% blocktranslate %}
+                                Подключить аккаунт
+                                {% endblocktranslate %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 d-dashboard__list-col">
+                    <div class="d-dashboard-step-card d-dashboard__list-card">
+                        <div class="d-dashboard-step-card__step">{% trans 'Шаг' %} 2</div>
+                        <picture class="d-dashboard-step-card__picture">
+                            <img src="{% static 'img/steps/step2.svg' %}"
+                                 alt="Выберите стратегию и начните копировать сделки">
+                        </picture>
+                        <div class="d-dashboard-step-card__inner">
+                            <div class="d-dashboard-step-card__content">
+                                <h3 class="d-dashboard-step-card__title">
+                                    {% blocktranslate %}
+                                    Выберите стратегию и начните копировать сделки
+                                    {% endblocktranslate %}
+                                </h3>
+                                <div class="d-dashboard-step-card__description">
+                                    {% blocktranslate %}
+                                    Выберите удобный вам режим копирования сделок –
+                                    автоматический (копитрейдинг) или ручной (сигналы в Telegram). Подписки на стратегии
+                                    и
+                                    Telegram-сигналы бывают бесплатные или с фиксированной стоимостью.
+                                    {% endblocktranslate %}
+                                </div>
+                            </div>
+                            <button
+                                    {% if not api_token %}
+                                    data-micromodal-trigger="modal-no-api"
+                                    {% else %}
+                                    to-url="{% url 'appStrategy' %}"
+                                    {% endif %}
+                                    type="button"
+                                    class="btn-default d-dashboard-step-card__btn">
+                                {% blocktranslate %}
+                                Выбрать стратегию
+                                {% endblocktranslate %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 d-dashboard__list-col">
+                    <div class="d-dashboard-step-card d-dashboard__list-card">
+                        <div class="d-dashboard-step-card__step">{% trans 'Шаг' %} 3</div>
+                        <picture class="d-dashboard-step-card__picture">
+                            <img src="{% static 'img/steps/step3.svg' %}" alt="Расслабьтесь и зарабатывайте">
+                        </picture>
+                        <div class="d-dashboard-step-card__inner">
+                            <div class="d-dashboard-step-card__content">
+                                <h3 class="d-dashboard-step-card__title">
+                                    {% blocktranslate %}
+                                    Расслабьтесь и
+                                    зарабатывайте
+                                    {% endblocktranslate %}
+                                </h3>
+                                <div class="d-dashboard-step-card__description">
+                                    {% blocktranslate %}
+                                    Наблюдайте, как сделки опытного трейдера приносят вам прибыль.
+                                    {% endblocktranslate %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-dashboard__subtitle">
+                {% blocktranslate %}
+                Как стать трейдером
+                {% endblocktranslate %}
+            </div>
+            <div class="row d-dashboard__trade-list">
+                <div class="col-6 d-dashboard__trade-list-col">
+                    <div class="d-trade-card">
+                        <h3 class="d-trade-card__title">
+                            {% blocktranslate %}Зарабатывайте на своей экспертизе {% endblocktranslate %}</h3>
+                        <div class="d-trade-card__description">
+                            {% blocktranslate %}
+                            Получайте прибыль от всех платных подписок на ваши стратегии и Telegram-сигналы.
+                            {% endblocktranslate %}
+                        </div>
+                        <a data-micromodal-trigger="modal-trade" class="d-trade-card__link">
+                            {% blocktranslate %}Стать трейдером{% endblocktranslate %}
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 d-dashboard__trade-list-col">
+                    <div class="d-trade-card">
+                        <h3 class="d-trade-card__title">
+                            {% blocktranslate %}Удобные инструменты для торговли на бирже{% endblocktranslate %}
+                        </h3>
+                        <div class="d-trade-card__description">
+                            {% blocktranslate %}
+                            Используйте наши инструменты для торговли на крипторынке:
+                            уведомления о тикерах, визуальную аналитику, уведомления в Telegram, криптоарбитраж.
+                            Бесплатно.
+                            {% endblocktranslate %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+<div class="modal micromodal-slide" id="modal-trade" aria-hidden="false">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="m-modal modal__container" role="dialog" aria-modal="true">
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+            <div class="m-modal__body">
+                <div class="m-modal__trade">
+                    <div class="m-modal__title">
+                        {% blocktranslate %}
+                        Подключите биржевой аккаунт
+                        {% endblocktranslate %}
+                    </div>
+                    <div class="m-modal__description">
+                        {% blocktranslate %}
+                        Вы ещё не добавили ни одного биржевого аккаунта. Добавьте биржевой аккаунт, чтобы разместить
+                        стратегию.
+                        {% endblocktranslate %}
+                    </div>
+                    <button to-url="{% url 'appAccounts' %}" class="btn-default m-modal__btn-trade">
+                        {% blocktranslate %}
+                        Подключить аккаунт
+                        {% endblocktranslate %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<div class="modal micromodal-slide" id="modal-confirm-delete" aria-hidden="false">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="m-modal modal__container" role="dialog" aria-modal="true">
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+            <div class="m-modal__body">
+                <div class="m-modal-balance">
+                    <form class="m-modal-balance__add" action="#">
+                        <div class="m-modal-balance__add-address">
+                            <div id="key-name" class="m-modal-balance__add-address-title">Удаление: ""></div>
+                            <div class="m-modal-balance__add-address-text">Вы точно хотите удалить?</div>
+                        </div>
+                        <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                            <svg class="u-icon d-alert__icon">
+                                <use xlink:href="{% static 'img/svg/sprite.svg#warning' %}"></use>
+                            </svg>
+                            <div class="d-alert__text">
+                            {% trans 'Данное действие сотрёт ваши API токеты навсегда. Если вы захотите добавить токены, нужно будет создать новые' %}
+                            </div>
+                        </div>
+                        <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+                            <svg class="u-icon d-alert__icon">
+                                <use xlink:href="{% static 'img/svg/sprite.svg#warning' %}"></use>
+                            </svg>
+                            <div class="d-alert__text">
+                            {% trans 'После удаления токетов, наш сервис не сможет обеспечивать вас нашим функционалом' %}
+                            </div>
+                        </div>
+                        <div class="m-modal-balance__add-alert">
+                            <button id="key-id" to-url = '' style="width: 100%"  type="button"
+                                    class="btn-secondary m-modal-balance__add-code-btn">
+                                Удалить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/tblock.js' %}"></script>
+{% endblock %}

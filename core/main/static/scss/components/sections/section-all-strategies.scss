@@ -1,0 +1,131 @@
+.section-all-strategies {
+  width: 100%;
+  padding-bottom: 110px;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 70px var(--app-side-padding) 100px var(--app-side-padding);
+    background-color: #fff;
+  }
+
+  &__title {
+    width: 100%;
+    max-width: 940px;
+    margin-bottom: 60px;
+    color: var(--app-color-grey-4);
+    line-height: 1.424;
+    text-align: center;
+    font-size: var(--app-font-size-5);
+  }
+
+  &__filters-wrapper {
+    width: 100%;
+    max-width: 1390px;
+    overflow: hidden;
+  }
+
+  &__filters-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: -10px;
+
+    @include media-xl {
+      justify-content: flex-start;
+    }
+
+    @include media-xs {
+      flex-direction: column;
+      margin: 0;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+
+    @include media-xs {
+      width: 100%;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+
+    label {
+      margin-right: 25px;
+      font-size: var(--app-font-size-3);
+      font-weight: 300;
+      color: var(--app-color-grey-4);
+      line-height: 1.424;
+
+      @include media-sm {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__table-wrapper {
+    width: 100%;
+    max-width: 1505px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 0 var(--app-side-padding) 0 var(--app-side-padding);
+    overflow: auto;
+  }
+
+  &__pagination-wrapper {
+    width: 100%;
+    max-width: 1505px;
+    margin: 0 auto;
+    padding: 0 var(--app-side-padding) 0 var(--app-side-padding);
+
+    @include media-lg {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+
+    @include media-lg {
+      margin: 0;
+    }
+
+    p {
+      margin: 08px;
+      color: var(--app-color-grey-4);
+      font-size: var(--app-font-size-3);
+      font-weight: 300;
+    }
+
+    button {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      background-color: transparent;
+
+      &:hover {
+        svg {
+          fill: var(--app-color-green-1);
+        }
+      }
+
+      svg {
+        width: 8px;
+        height: 15px;
+        fill: var(--app-color-grey-1);
+      }
+    }
+  }
+}

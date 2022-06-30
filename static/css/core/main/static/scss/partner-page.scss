@@ -1,0 +1,45 @@
+@import './partials/base.scss';
+@import './components/account-aside.scss';
+@import './components/account-header.scss';
+@import './components/UI/hamburger.scss';
+@import './components/UI/btn-back.scss';
+@import './components/UI/dropdown.scss';
+@import './components/UI/btn-default.scss';
+@import './components/sections/section-partner-info.scss';
+
+@import './components/sections/section-table.scss';
+@import './components/UI/table-default.scss';
+
+.partner-page-main {
+  @include media-md {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: 1560px;
+    display: flex;
+    flex-direction: column;
+    padding: 35px 0 100px 0;
+
+    @include media-md {
+      padding-top: 35px;
+    }
+  }
+
+  &__btn-back {
+    margin: 0 auto 10px 20px;
+  }
+
+  &__section-partner-info {
+    margin-bottom: 70px;
+  }
+
+  &__partners-list {
+    .section-table__inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+  }
+}

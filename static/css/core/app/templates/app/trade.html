@@ -1,0 +1,324 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    LuckyTrader - {% trans "Трейдер" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/trade-page.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main trade-page-main">
+  <div class="trade-page-main__inner">
+    <div class="trade-page-main__col-left">
+      <a href="#" class="trade-page-main__btn-back btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path fill-rule="evenodd" d="M9.499,0.499 L0.499,9.499 L9.499,18.499 L9.499,0.499 Z" />
+        </svg>
+        Back
+      </a>
+      <section class="section-trade-info">
+        <h1 class="section-trade-info__title">
+          <img src="./assets/img/icons/checkmark.svg" alt="Checkmark icon">
+          SAM SIMON TRADE
+        </h1>
+        <p class="section-trade-info__text">
+          ...
+        </p>
+      </section>
+      <section class="section-strategy-profit">
+        <h2 class="section-strategy-profit__title">Strategy Profit</h2>
+        <div class="section-strategy-profit__periods-wrapper">
+          <ul class="section-strategy-profit__periods-list">
+            <li class="section-strategy-profit__period">
+              <button>Day</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button class="active-period">Week</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>1 Month</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>3 Month</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>6 Month</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>Year</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>All Time</button>
+            </li>
+          </ul>
+        </div>
+        <div class="section-strategy-profit__chart" data-chart-strategy-profit></div>
+      </section>
+      <section class="section-table">
+        <div class="section-table__inner">
+          <h2 class="section-table__title">Signal History</h2>
+          <div class="section-table__table-wrapper">
+            <table class="section-table__table-default table-default">
+              <thead>
+                <tr>
+                  <td>Pair</td>
+                  <td>Order</td>
+                  <td>Price</td>
+                  <td class="table-default__text-center">%</td>
+                  <td class="table-default__text-right">Creation Date</td>
+                  <td class="table-default__text-right">Execution Date</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>BNB USDT</td>
+                  <td>BUY</td>
+                  <td>394.5000</td>
+                  <td class="table-default__text-center">71.80%</td>
+                  <td class="table-default__text-right">29 Apr 2022 12:02:58</td>
+                  <td class="table-default__text-right">29 Apr 2022 14:35:51</td>
+                </tr>
+                <tr>
+                  <td>BNB USDT</td>
+                  <td>BUY</td>
+                  <td>394.5000</td>
+                  <td class="table-default__text-center">71.80%</td>
+                  <td class="table-default__text-right">29 Apr 2022 12:02:58</td>
+                  <td class="table-default__text-right">29 Apr 2022 14:35:51</td>
+                </tr>
+                <tr>
+                  <td>BNB USDT</td>
+                  <td>BUY</td>
+                  <td>394.5000</td>
+                  <td class="table-default__text-center">71.80%</td>
+                  <td class="table-default__text-right">29 Apr 2022 12:02:58</td>
+                  <td class="table-default__text-right">29 Apr 2022 14:35:51</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="#" class="section-table__link-all-history">View all history</a>
+        </div>
+      </section>
+    </div>
+    <div class="trade-page-main__col-right">
+      <section class="section-follow trade-page-main__section-follow">
+        <div class="section-follow__follow-cards-wrapper">
+          <ul class="follow-cards">
+            <li class="follow-cards__item">
+              <h2 class="follow-cards__title">Copy Trading</h2>
+              <p class="follow-cards__value">50 USDT</p>
+              <p class="follow-cards__text">per 30 day</p>
+              <button class="follow-cards__btn-follow btn-default">Follow</button>
+            </li>
+            <li class="follow-cards__item">
+              <h2 class="follow-cards__title">Telegram</h2>
+              <p class="follow-cards__value">FREE</p>
+              <p class="follow-cards__text">always</p>
+              <button class="follow-cards__btn-follow btn-default">Follow</button>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="section-trade-stats">
+        <div class="section-trade-stats__inner">
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">Subscription Requirements</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">Minimum balance on Fiat and Spot required</p>
+                <p class="section-trade-stats__value">140 USDT</p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">Strategy Options</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">TYpe</p>
+                <p class="section-trade-stats__value">Spot</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Exchange</p>
+                <p class="section-trade-stats__value">
+                  <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                  BINANCE
+                </p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Risk</p>
+                <p class="section-trade-stats__value">3.1</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Base Coin</p>
+                <p class="section-trade-stats__value">USDT</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Strategy Balance</p>
+                <p class="section-trade-stats__value">406.00</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Rating</p>
+                <p class="section-trade-stats__value section-trade-stats__value_green">9.1</p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">Subscribers</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">Copy Trading</p>
+                <p class="section-trade-stats__value">15</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Signals</p>
+                <p class="section-trade-stats__value">123</p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">Basic Statistics</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">Trading Period</p>
+                <p class="section-trade-stats__value">897 Days</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Total Signals</p>
+                <p class="section-trade-stats__value">1669</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">Signals Per Day</p>
+                <p class="section-trade-stats__value">1.6</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+  {% comment %} <script src="./assets/js/account.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <script>
+    (() => {
+      const chartConfig = {
+        chart: {
+          height: 220,
+          type: 'area',
+          parentHeightOffset: 0,
+          toolbar: {
+            show: false
+          },
+          zoom: {
+            enabled: false
+          },
+          animations: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 2,
+          curve: 'straight'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        colors: ['#3e3e3e'],
+        grid: {
+          show: true,
+          padding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: -10
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+        xaxis: {
+          labels: {
+            show: false
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          tooltip: {
+            enabled: false
+          },
+        },
+        yaxis: {
+          labels: {
+            show: false
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          tooltip: {
+            enabled: false
+          },
+        },
+        legend: {
+          show: false
+        }
+      };
+
+      const chartsTopStrategies = document.querySelector('[data-chart-strategy-profit]');
+
+      new ApexCharts(chartsTopStrategies, {
+        ...chartConfig,
+        series: [{
+          data: [100, 50, 40, 60, 0, null, null, null, null, null]
+        },
+        {
+          data: [null, null, null, null, 0, 20, 30, 50, 70, 100]
+        }],
+        fill: {
+          gradient: {
+            colorStops: [
+              [
+                {
+                  offset: 0,
+                  color: '#fff',
+                  opacity: 1
+                },
+                {
+                  offset: 100,
+                  color: '#e8555f',
+                  opacity: 1
+                }
+              ],
+              [
+                {
+                  offset: 0,
+                  color: '#54e8cd',
+                  opacity: 1
+                },
+                {
+                  offset: 100,
+                  color: '#fff',
+                  opacity: 1
+                }
+              ]
+            ],
+          },
+        }
+      }).render();
+    })();
+  </script>
+</body> {% endcomment %}

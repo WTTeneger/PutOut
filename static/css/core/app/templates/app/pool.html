@@ -1,0 +1,193 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load staticfiles %}
+{% load tag_library %}
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<!--<link href="{% static 'css/general-page.css' %}" rel="stylesheet">-->
+<link href="{% static 'css/trade-page.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/general-page.css' %}" type="text/css">
+<script src="{% static '/js/tblock.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main trade-page-main">
+  <div class="trade-page-main__inner">
+    <div class="trade-page-main__col-left">
+      <a href="{% url 'appDashboard' %}" class="trade-page-main__btn-back btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path fill-rule="evenodd" d="M9.499,0.499 L0.499,9.499 L9.499,18.499 L9.499,0.499 Z"/>
+        </svg>
+        {% trans 'Назад' %}
+      </a>
+      <section class="section-trade-info" style="min-height: 0px;">
+        <h1 class="section-trade-info__title">
+          <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark icon">
+          {{pool.title}}
+        </h1>
+      </section>
+      <section class="section-table">
+        <div class="section-table__inner">
+          <h2 class="section-table__title">{% trans 'История Пула' %}</h2>
+          <div class="section-table__table-wrapper">
+            <table class="section-table__table-default table-default">
+              <thead>
+              <tr>
+                <td>{% trans 'Дата начала' %}</td>
+                <td>{% trans 'Дата окончания' %}</td>
+                <td>{% trans 'Баланс на старте' %}</td>
+                <td>{% trans 'Баланс на выходе' %}</td>
+              </tr>
+              </thead>
+              <tbody>
+              {% for el in pool.logs %}
+              <tr>
+                <td>{{el.data}}</td>
+                <td>{{el.data_end}}</td>
+                <td>{{el.start_total}} USD</td>
+                <td>{{el.end_total}} USD</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="trade-page-main__col-right">
+      {% if not pool.status %}
+      <section class="section-follow trade-page-main__section-follow">
+        <div class="section-follow__follow-cards-wrapper">
+          <form action="{% url 'appPool' pool.id %}" method="POST" class="follow-cards">
+            {% csrf_token %}
+            <li class="follow-cards__item" style="width: 420px;">
+              <h2 class="follow-cards__title">{% trans 'Сделать вклад' %}</h2>
+              <p class="follow-cards__text">{% trans 'На'%} {{pool.total_day}} {% trans 'дней' %}</p>
+              <div class="input-el" style="width: 90%;margin-bottom: 10px">
+                <label for="s1" class="input-el__label">{% trans 'Сумма вклада' %}</label>
+                <div class="errors" style="color: red; margin-bottom: 5px">{{SendMoneyToPool.non_field_errors}}</div>
+
+                <div class="input-el__wrapper input-el__wrapper_active"
+                     style="display: flex; align-items: center;">
+                  {{SendMoneyToPool.total}}
+                  <!--                  <input type="number" class="u-input input-el__area" name="login" id="s1">-->
+                  <h1 style="padding: 10px;">USD</h1>
+                </div>
+              </div>
+              <button type="submit" class="follow-cards__btn-follow btn-default">
+                {% trans 'Сделать вклад' %}
+              </button>
+            </li>
+          </form>
+        </div>
+      </section>
+      {% endif %}
+      <section class="section-trade-stats">
+        <div class="section-trade-stats__inner">
+
+
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Подробная информация' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Тип' %}</p>
+                <p class="section-trade-stats__value">POOL</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Статус' %}</p>
+                <p class="section-trade-stats__value">{% if pool.status %} В работе {% else %} Наполняется {% endif %}</p>
+              </li>
+              {% if not pool.status %}
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Балланс сейчас' %}</p>
+                <p class="section-trade-stats__value">{{pool.now_total}} USD</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Максимальный балланс' %}</p>
+                <p class="section-trade-stats__value">{{pool.max_total}} USD</p>
+              </li>
+              {% else %}
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Дней до окончания' %}</p>
+                <p class="section-trade-stats__value">{{pool.count_day_to_end}} {% trans 'Дней' %}</p>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Моя статистика' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Сумма вклада' %}</p>
+                <p class="section-trade-stats__value">{{userdata.total}} USD</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Сумма в процентах' %}</p>
+                <p class="section-trade-stats__value">{{userdata.percent|addf:0}}%</p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Участники' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Всего участников' %}</p>
+                <p class="section-trade-stats__value">{{pool.followers|length }}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Базовая статистика' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Срок вклада' %}</p>
+                <p class="section-trade-stats__value">{{pool.total_day}} {% trans 'Дней' %}</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Средний процент прибыли' %}</p>
+                <p class="section-trade-stats__value">{{pool.percent|addf:0}}%</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+  <div class="modal micromodal-slide" id="modal-add-folowers" aria-hidden="false">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="m-modal modal__container" role="dialog" aria-modal="true">
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        <div class="m-modal__body">
+          <div style="display: flex;" class="m-modal__title">{% trans "Удалить" %} <h2 style="margin-left: 10px;"
+                                                                                       id='tgg'></h2></div>
+          <form action="{% url 'appStrategyFollowId' 'copy' pool.id %}" method="post" class="modal__form">
+            {% csrf_token %}
+            <div class="input-user-pass m-modal__form-line">
+              <div class="input-user-pass__header">
+                <h1 id="ttext">Username</h1>
+              </div>
+            </div>
+            <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+              <img src="{% static 'img/svg/warning.svg' %}" class="u-icon d-alert__icon">
+
+              <div class="d-alert__text">После подписания с вашего счёта спишется {{price}}.
+              </div>
+            </div>
+            <button to-url="{% url 'appStrategyFollowId' 'copy' pool.id %}" id="buttremtg" type="button"
+                    name="change-username" class="btn-default m-modal__form-btn btn-remover">
+              {% trans "Подписаться" %}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="{% static 'js/tblock.js' %}"></script>
+{% endblock %}

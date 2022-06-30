@@ -1,0 +1,147 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/general-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'appTGKeys' %}" method="post">
+    {% csrf_token %}
+    <main page-api-block="api-1" id="api-1" style="display: block" class="page-account__main api-key-page-main">
+        <div class="d-api-key">
+            <div class="container-account d-api-key__container">
+                <div class="d-api-key__inner">
+                    <div class="d-api-key__form">
+                        <a href="{% url 'appSettings' %}" class="prev-page-link d-api-key__prev-page-link">
+                            <span class="prev-page-link__icon"></span>
+                            <span class="prev-page-link__title">{% trans 'Назад в Настройки' %}</span>
+                        </a>
+                        <h1 class="d-api-key__title">{% trans 'Добавление API-ключа от Telegram' %}</h1>
+                        <ul class="step-list d-api-key__step-list">
+                            <li class="step-list__card is-active">{% trans 'Копирование токена' %}</li>
+                            <li class="step-list__card">{% trans 'Ввод деталей' %}</li>
+                        </ul>
+                        <div class="d-api-key__content">
+                            {% blocktranslate %}
+                            <p>1. Перейдите в <a href="https://t.me/Lucky_tradebot" target="_blank">телеграмм бот</a>
+                                и нажмите старт.</p>
+                            <p>2. Скопируйте id телеграм аккаунта.</p>
+                            <p>Готово! Вы скопировали ключ Telegram.</p>
+                            {% endblocktranslate %}
+                        </div>
+                        <div class="btn-groups d-api-key__form-group-btn">
+                            <button page-api="api-2" type="button" class="btn-default btn-groups__item">Далее</button>
+                        </div>
+                    </div>
+                    <div class="d-api-key__aside">
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">{% trans 'Ограничения TG-ключа' %}</h3>
+                            <div class="card-info__description">
+                                {% blocktranslate %}
+                                <p>Чтобы позволить нашей платформе автоматически отправлять сигналы в ваш телеграмм аккаунт нам нужен telegram ключ.</p>
+                                <p>Данный ключ даёт нам возможность отправлять вам сообщение в нашем тг боте.</p>
+                                {% endblocktranslate %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main page-api-block="api-2" id="api-2" style="display: none" class="page-account__main api-key-page-main">
+        <div class="d-api-key">
+            <div class="container-account d-api-key__container">
+                <div class="d-api-key__inner">
+                    <div class="d-api-key__form">
+                        <a href="{% url 'appSettings' %}" class="prev-page-link d-api-key__prev-page-link">
+                            <span class="prev-page-link__icon"></span>
+                            <span class="prev-page-link__title">{% trans 'Назад в Настройки' %}</span>
+                        </a>
+                        <h1 class="d-api-key__title">{% trans 'Добавление API-ключа от Telegram' %}</h1>
+                        <ul class="step-list d-api-key__step-list">
+                            <li class="step-list__card">{% trans 'Копирование токена' %}</li>
+                            <li class="step-list__card is-active">{% trans 'Ввод деталей' %}</li>
+                        </ul>
+                        <div class="input-user-pass d-api-key__form-line u-width-100">
+                            <div class="input-user-pass__header">
+                                <label for="name-integration">{% trans 'Назовите вашу синхронизацию' %}</label>
+                            </div>
+                            <div class="input-user-pass__input-wrapper">
+                                {{ form.name_integration }}
+                            </div>
+                        </div>
+                        <div class="input-user-pass d-api-key__form-line u-width-100">
+                            <div class="input-user-pass__header">
+                                <label for="api-key">{% trans 'TG ключ' %}</label>
+                            </div>
+                            <div class="input-user-pass__input-wrapper">
+                                {{ form.tg_key }}
+                            </div>
+                        </div>
+                        <div class="btn-groups d-api-key__form-group-btn">
+                            <button page-api="api-1" type="button" class="btn-secondary btn-groups__item">Назад</button>
+                            <button type="submit" onclick="setTimeout(() => this.disabled = true, 1);" class="btn-default btn-groups__item">Добавить</button>
+                            {# <a data-micromodal-trigger="modal-wrong-key">Popap</a> #}
+                        </div>
+                    </div>
+                    <div class="d-api-key__aside">
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">TG ключ</h3>
+                            <div class="card-info__description">
+                                {% blocktranslate %}
+                                <p>Мы используем ваш ключ исключительно для отправки вам сообщений в нашем боте</p>
+                                <p>Если вы завершите работу с ботом, мы не сможем слать вам информацию.</p>
+                                {% endblocktranslate %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</form>
+<div class="modal micromodal-slide" id="modal-wrong-key" aria-hidden="false">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+        <div class="m-modal modal__container" role="dialog" aria-modal="true">
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close=""></button>
+            <div class="m-modal__body">
+                <div class="m-modal__trade">
+                    <div class="m-modal__title">{% trans 'Неверные данные' %}</div>
+                    <div id="error-text" class="m-modal__description">
+                        {% if form.errors %}
+                        {{form.non_field_errors}}
+                        {% endif %}
+                    </div>
+                    <button class="btn-default m-modal__btn-trade" data-micromodal-close="">Понятно</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'js/tblock.js' %}"></script>
+<script src="{% static 'js/sign-in.js' %}"></script>
+{% if form.errors %}
+<script>
+    let elems = 'api-2'
+    for (el of document.querySelectorAll('[page-api-block]')) {
+        let atributes = el.getAttribute('id')
+        if (atributes == elems) {
+            document.getElementById(atributes).style.display = 'block'
+        } else {
+            document.getElementById(atributes).style.display = 'none'
+        }
+    }
+    let elem = document.getElementById('modal-wrong-key')
+    open_micro_modal = elem
+    elem.classList.add('is-open')
+</script>
+{% endif %}
+{% endblock %}

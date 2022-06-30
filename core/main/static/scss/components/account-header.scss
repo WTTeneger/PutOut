@@ -1,0 +1,140 @@
+.account-header {
+  width: calc(100% - var(--app-account-aside-width));
+  height: var(--app-account-header-height);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 0 var(--app-side-padding);
+  background-color: #fff;
+  box-shadow: 0px 3px 10px 0px rgba(0, 17, 17, 0.08);
+  z-index: 99;
+
+  @include media-xl {
+    width: 100%;
+  }
+
+  &__btn-nav-toggle {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: var(--app-side-padding);
+    transform: translateY(-50%);
+    flex-shrink: 0;
+    z-index: 99;
+
+    @include media-xl {
+      display: block;
+    }
+  }
+
+  &__balance {
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  &__dropdown-user {
+    margin-top: 10px;
+    margin-left: 75px;
+
+    @include media-md {
+      margin-left: 20px;
+    }
+  }
+}
+
+.user-balance {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    color: var(--app-color-grey-4);
+    font-size: var(--app-font-size-1);
+    font-weight: 100;
+    line-height: 1.403;
+  }
+
+  &__value {
+    font-size: var(--app-font-size-3);
+    font-weight: 500;
+    color: var(--app-color-green-4);
+    line-height: 1.154;
+    text-align: right;
+  }
+}
+
+.dropdown-user {
+  .dropdown__btn {
+    color: var(--app-color-grey-4);
+
+    svg {
+      margin-left: 55px;
+
+      @include media-sm {
+        margin-left: 12px;
+      }
+    }
+  }
+
+  &__photo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    margin-right: 12px;
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+
+    @include media-xs {
+      margin-right: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__name {
+    pointer-events: none;
+
+    @include media-xs {
+      display: none;
+    }
+  }
+
+  &.dropdown {
+    &_active {
+      .dropdown__btn {
+        +.dropdown__drop {
+          transform: translateY(0) translateX(0);
+        }
+      }
+    }
+  }
+
+  .dropdown__drop {
+    left: auto;
+    right: 0;
+    transform: translateY(-5px) translateX(0);
+  }
+
+  &__links {
+    li {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: var(--app-color-green-13);
+      }
+    }
+  }
+}

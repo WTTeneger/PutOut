@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load i18n %}
+{% load static %}
+{% load tag_library %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="{% static 'js/jquery-3.6.0.js' %}"></script>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link href="{% static 'css/variables.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+    <link href="{% static 'css/general-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/welcome-page.css' %}" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+
+
+    {% block head %} {% endblock %}
+
+</head>
+
+<body>
+
+{% csrf_token %}
+<div class="page-account">
+    <aside class="page-account__aside account-aside" id="account-aside" data-aside>
+        <a href="{% url 'appDashboard' %}" class="account-aside__logo">
+            <img src="{% static 'img/logo-type-3.png' %}" alt="Lucky Trade Logo">
+        </a>
+        <nav class="account-aside__nav aside-nav">
+            <ul class="aside-nav__list">
+                <li class="aside-nav__item">
+                    {% if app == 'appDashboard' %}
+                    <a href="{% url 'appDashboard' %}" class="aside-nav__link aside-nav__link_active">
+                        {% else %}
+                        <a href="{% url 'appDashboard' %}" class="aside-nav__link">
+                            {% endif %}
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="22.5px" height="21.5px">
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M1.882,1.488 L14.284,1.488 L14.284,13.413 L1.882,13.413 L1.882,1.488 Z"/>
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M7.882,7.488 L20.283,7.488 L20.283,19.413 L7.882,19.413 L7.882,7.488 Z"/>
+                            </svg>
+                            {% translate "Главная" %}
+                        </a>
+                    </a>
+                </li>
+                <li class="aside-nav__item menu--disabled">
+                    <a href="#" class="aside-nav__link">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             width="22.5px" height="21.5px">
+                            <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter"
+                                  fill="none"
+                                  d="M1.882,1.488 L14.284,1.488 L14.284,13.413 L1.882,13.413 L1.882,1.488 Z"/>
+                            <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter"
+                                  fill="none"
+                                  d="M7.882,7.488 L20.283,7.488 L20.283,19.413 L7.882,19.413 L7.882,7.488 Z"/>
+                        </svg>
+                        {% translate "Курсы" %}
+                    </a>
+                </li>
+                <li class="aside-nav__item" style="cursor: pointer;">
+                    {% if app == 'appStrategy' %}
+                    <a href="{% url 'appStrategy' %}" class="aside-nav__link aside-nav__link_active">
+                        {% else %}
+                        <a {% if not api_token %} data-micromodal-trigger="modal-no-api" {%  else %} href="{% url 'appStrategy' %}" {% endif %} class="aside-nav__link">
+                            {% endif %}
+
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="19.5px" height="19.5px">
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z"/>
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z"/>
+                            </svg>
+                            {% translate "Копитрейдинг" %}
+                        </a>
+                    </a>
+                </li>
+                <li class="aside-nav__item">
+                    {% if app == 'appPools' %}
+                    <a href="{% url 'appPools' %}" class="aside-nav__link aside-nav__link_active">
+                        {% else %}
+                        <a href="{% url 'appPools' %}" class="aside-nav__link">
+                            {% endif %}
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="19.5px" height="19.5px">
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z"/>
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z"/>
+                            </svg>
+                            {% translate "Пуллы" %}
+                        </a>
+                    </a>
+                </li>
+                <li class="aside-nav__item">
+                    {% if app == 'appAccounts' %}
+                    <a href="{% url 'appAccounts' %}" class="aside-nav__link aside-nav__link_active">
+                        {% else %}
+                        <a href="{% url 'appAccounts' %}" class="aside-nav__link">
+                            {% endif %}
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="19.5px" height="19.5px">
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z"/>
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z"/>
+                            </svg>
+                            {% translate "Аккаунты" %}
+                        </a>
+                    </a>
+                </li>
+                <li class="aside-nav__item">
+                    {% if app == 'appReferral' %}
+                    <a href="{% url 'appReferral' %}" class="aside-nav__link aside-nav__link_active">
+                        {% else %}
+                        <a href="{% url 'appReferral' %}" class="aside-nav__link">
+                            {% endif %}
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 width="19.5px" height="19.5px">
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z"/>
+                                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt"
+                                      stroke-linejoin="miter" fill="none"
+                                      d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z"/>
+                            </svg>
+                            {% translate "Реферальная система" %}
+                        </a>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <header class="page-account__header account-header">
+        <button class="account-header__btn-nav-toggle hamburger hamburger_type2 hamburger--spin"
+                aria-label="Toggle aside"
+                aria-expanded="false" aria-controls="account-aside" type="button" data-btn-aside-toggle>
+        <span class="hamburger-box" aria-hidden="true">
+          <span class="hamburger-inner"></span>
+        </span>
+        </button>
+        <a href="{% url 'appBalance' 's' %}" class="account-header__balance user-balance">
+            <p class="user-balance__label">{% translate "Баланс" %}</p>
+            <p class="user-balance__value">{{balance|addf:bonus_balance}} USD</p>
+        </a>
+        {% comment %}
+        <a href="#" class="account-header__balance user-balance">
+            <p class="user-balance__label">{% translate "Бонусный баланс" %}</p>
+            <p class="user-balance__value">{{bonus_balance}} USD</p>
+        </a>
+        {% endcomment %}
+        <div class="dropdown account-header__dropdown-user dropdown-user" data-dropdown>
+            <button class="dropdown__btn" data-dropdown-btn>
+                <div class="dropdown-user__photo">
+                    <img src="{% static 'img/user.png' %}" alt="User Photo">
+                </div>
+
+                <span class="dropdown-user__name">{% if username %}{{username}}{% else %}{{mail}}{%endif%}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M0.0,0.947 L6.149,7.96 L12.298,0.947 L0.0,0.947 Z"/>
+                </svg>
+            </button>
+            <div class="dropdown__drop">
+                <ul class="dropdown-user__links">
+                    <li><a href="{% url 'appSettings' %}">{% trans "Настройки" %}</a></li>
+                    <li><a href="{% url 'sign-out' %}">{% trans "Выход" %}</a></li>
+                    <li><a href="#">...</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    {% block content %}{% endblock %}
+
+    <div id="modal-no-api" class="modal micromodal-slide">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+        <div class="m-modal modal__container" role="dialog" aria-modal="true">
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close=""></button>
+            <div class="m-modal__body">
+                <div class="m-modal__trade">
+                    <div class="m-modal__title">
+                        {% trans 'Подключите биржевой аккаунт' %}
+                    </div>
+                    <div class="m-modal__description">
+                        {% blocktrans %}
+                        Вы  отключили или ещё не добавили биржевые аккаунты. Добавьте или включите биржевой аккаунт,
+                        чтобы подписаться на стратегии.
+                        {% endblocktrans %}
+                    </div>
+                    <button to-url="/ru/app/accounts/" class="btn-default m-modal__btn-trade">
+                        {% trans 'Подключить аккаунт' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'libs/micromodal.min.js' %}"></script>
+<script src="{% static 'js/account.js' %}"></script>
+<script src="{% static 'js/tblock.js' %}"></script
+</body>
+
+</html>

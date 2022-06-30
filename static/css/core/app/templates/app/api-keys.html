@@ -1,0 +1,339 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/general-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'appAPIKeys' %}" method="post">
+    {% csrf_token %}
+    <main page-api-block="api-1" id="api-1" style="display: block" class="page-account__main api-key-page-main">
+        <div class="d-api-key">
+            <div class="container-account d-api-key__container">
+                <div class="d-api-key__inner">
+                    <div class="d-api-key__form">
+                        <a href="{% url 'appDashboard' %}" class="prev-page-link d-api-key__prev-page-link">
+                            <span class="prev-page-link__icon"></span>
+                            <span class="prev-page-link__title">Назад в Аккаунты</span>
+                        </a>
+                        <h1 class="d-api-key__title">Добавление API-ключа от биржевого аккаунта</h1>
+                        <div class="d-api-key__content">
+                            <p>Следуйте подсказкам, чтобы привязать биржевой аккаунт.</p>
+                        </div>
+                        <div class="input-el d-api-key__form-line">
+                            <label for="select-1" class="input-el__label">Выберите биржу</label>
+                            <div class="input-el__wrapper">
+                                <div class="custom-select input-el__area">
+                                    {{ form.place }}
+                                    {% comment %}
+                                    <select name="select" class="custom-select__select-default" id="select-1">
+                                        <option value="Binance">Binance</option>
+                                        <option value="ByBit">ByBit</option>
+                                        <option value="OKEx">OKEx</option>
+                                        <option value="FTX">FTX</option>
+                                    </select>
+                                    {% endcomment %}
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="custom-select__arrow">
+                                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-groups d-api-key__form-group-btn">
+                            <button page-api="api-2" type="button" class="btn-default btn-groups__item">Далее</button>
+                        </div>
+                    </div>
+                    <div class="d-api-key__aside">
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">Доступные биржи</h3>
+                            <div class="card-info__description">На данный момент мы поддерживаем биржи Binance, OKEx,
+                                Bybit
+                                и FTX. Интеграции с другими биржами планируются в дальнейшем.
+                            </div>
+                        </div>
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">Субаккаунт Binance</h3>
+                            <div class="card-info__description">Для эффективного копирования сделок мы рекомендуем вам
+                                использовать отдельный субаккаунт Binance для каждой стратегии. Используйте его только
+                                для
+                                копитрейдинга и не проводите других торговых операций.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main page-api-block="api-2" id="api-2" style="display: none" class="page-account__main api-key-page-main">
+        <div class="d-api-key">
+            <div class="container-account d-api-key__container">
+                <div class="d-api-key__inner">
+                    <div class="d-api-key__form">
+                        <a href="{% url 'appDashboard' %}" class="prev-page-link d-api-key__prev-page-link">
+                            <span class="prev-page-link__icon"></span>
+                            <span class="prev-page-link__title">Назад в Аккаунты</span>
+                        </a>
+                        <h1 class="d-api-key__title">Добавление API-ключа от Binance</h1>
+                        <ul class="step-list d-api-key__step-list">
+                            <li class="step-list__card is-active">Создание аккаунта</li>
+                            <li class="step-list__card">Создание API-ключа</li>
+                            <li class="step-list__card">Ввод деталей</li>
+                        </ul>
+                        <div class="d-api-key__content">
+                            <p>Откройте <a href="https://www.binance.com" target="_blank">https://www.binance.com</a> и
+                                создайте аккаунт.</p>
+                            <p>Не забудьте включить двухфакторную аутентификацию в конце регистрации. Ее наличие -
+                                обязательное условие при создании API-ключа.</p>
+                        </div>
+                        <div class="btn-groups d-api-key__form-group-btn">
+                            <button page-api="api-1" type="button" class="btn-secondary btn-groups__item">Назад</button>
+                            <button page-api="api-3" type="button" class="btn-default btn-groups__item">Далее</button>
+                            <button type="button" class="btn-secondary btn-groups__item is-disabled">.is-disabled
+                            </button>
+                            <button type="button" class="btn-default btn-groups__item" disabled>:disabled</button>
+                        </div>
+                    </div>
+                    <div class="d-api-key__aside">
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">Черный список</h3>
+                            <div class="card-info__description">
+                                <p>Binance ограничил регистрацию пользователей из некоторых стран. Вы не сможете
+                                    зарегистрироваться на этой бирже, если ваш IP адрес принадлежит любой из следующих
+                                    стран: Албания, Республика Беларусь, Босния и Герцеговина, Бирма, Центральная
+                                    Африканская республика, Демократическая республика Конго, Корейская Народная
+                                    Демократическая республика, Кот Д'Ивуар, Крымская республика, Хорватия, Куба, Иран,
+                                    Ирак, Косово, Ливан, Либерия, Ливия, Македония, Молдавия, Сербия, Сомали, Судан,
+                                    Южный
+                                    Судан, Сирия, Венесуэла, Йемен, Зимбабве.</p>
+                                <p>Для IP адресов из США существует отдельный веб-сайт <a href="binance.us"
+                                                                                          target="_blank">binance.us</a>
+                                    На данный момент платформа Coinmatics не поддерживает API-ключи Binance US.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main page-api-block="api-3" id="api-3" style="display: none" class="page-account__main api-key-page-main">
+        <div class="d-api-key">
+            <div class="container-account d-api-key__container">
+                <div class="d-api-key__inner">
+                    <div class="d-api-key__form">
+                        <a href="{% url 'appDashboard' %}" class="prev-page-link d-api-key__prev-page-link">
+                            <span class="prev-page-link__icon"></span>
+                            <span class="prev-page-link__title">Назад в Аккаунты</span>
+                        </a>
+                        <h1 class="d-api-key__title">Добавление API-ключа от Binance</h1>
+                        <ul class="step-list d-api-key__step-list">
+                            <li class="step-list__card">Создание аккаунта</li>
+                            <li class="step-list__card is-active">Создание API-ключа</li>
+                            <li class="step-list__card">Ввод деталей</li>
+                        </ul>
+                        <div class="d-api-key__content">
+                            <p>1. Войдите в свою учетную запись Binance.</p>
+                            <p>2. Перейдите на страницу Профиль --> Управление API. Введите имя вашего нового API-ключа
+                                и
+                                нажмите кнопку "Создать".</p>
+                            <p>3. Binance запросит код из вашей электронной почты и код из вашего приложения для
+                                аутентификации. Введите коды и нажмите кнопку "Отправить".</p>
+                            <p>4. Ваш новый API-ключ создан. Обратите внимание: вы увидите секретный ключ, который
+                                впоследствии будет скрыт. Надёжно сохраните его на этом этапе.</p>
+                            <p>5. По умолчанию API-ключ имеет только разрешение "Разрешить чтение". В разделе
+                                "Ограничения
+                                API" внесите дополнительные изменения: для копирования Spot-стратегий выберите "Включить
+                                спотовую и маржинальную торговлю". Для копирования Futures-стратегий выберите два
+                                разрешения
+                                "Включить спотовую и маржинальную торговлю" и "Включить Фьючерсы".</p>
+                            <p>6. Сохраните изменения, введя код из вашего приложения для аутентификации.</p>
+                            <p>Готово! Вы создали ключ API Binance и настроили необходимые разрешения для
+                                копитрейдинга.</p>
+                        </div>
+                        <div class="btn-groups d-api-key__form-group-btn">
+                            <button page-api="api-2" type="button" class="btn-secondary btn-groups__item">Назад</button>
+                            <button page-api="api-4" type="button" class="btn-default btn-groups__item">Далее</button>
+                        </div>
+                    </div>
+                    <div class="d-api-key__aside">
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">Ограничения API-ключа</h3>
+                            <div class="card-info__description">
+                                <p>Чтобы позволить нашей платформе автоматически копировать сделки трейдера, установите
+                                    необходимые разрешения API-ключа.</p>
+                                <p>Для копирования Spot-стратегий выберите "Включить спотовую и маржинальную торговлю".
+                                    Для
+                                    копирования Futures-стратегий выберите разрешение "Включить Фьючерсы".</p>
+                                <p>Пожалуйста, не выбирайте опцию "Включить возможность вывода средств", чтобы
+                                    обезопасить
+                                    ваш биржевой аккаунт.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main page-api-block="api-4" id="api-4" style="display: none" class="page-account__main api-key-page-main">
+        <div class="d-api-key">
+            <div class="container-account d-api-key__container">
+                <div class="d-api-key__inner">
+                    <div class="d-api-key__form">
+                        <a href="{% url 'appDashboard' %}" class="prev-page-link d-api-key__prev-page-link">
+                            <span class="prev-page-link__icon"></span>
+                            <span class="prev-page-link__title">Назад в Аккаунты</span>
+                        </a>
+                        <h1 class="d-api-key__title">Добавление API-ключа от Binance</h1>
+                        <ul class="step-list d-api-key__step-list">
+                            <li class="step-list__card">Создание аккаунта</li>
+                            <li class="step-list__card">Создание API-ключа</li>
+                            <li class="step-list__card is-active">Ввод деталей</li>
+                        </ul>
+                        <div class="input-user-pass d-api-key__form-line u-width-100">
+                            <div class="input-user-pass__header">
+                                <label for="name-integration">Назовите вашу интеграцию</label>
+                            </div>
+                            <div class="input-user-pass__input-wrapper">
+                                {{ form.name_integration }}
+                                {% comment %}
+                                <input class="input-text-default" type="text" name="name-integration"
+                                       id="name-integration"
+                                       placeholder="">
+                                {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="input-user-pass d-api-key__form-line u-width-100">
+                            <div class="input-user-pass__header">
+                                <label for="api-key">API-ключ</label>
+                            </div>
+                            <div class="input-user-pass__input-wrapper">
+                                {{ form.public_key }}
+                                {% comment %}
+                                <input class="input-text-default" type="password" name="api-key" id="api-key"
+                                       placeholder=""
+                                       data-input-pass="10">
+                                {% endcomment %}
+                                <button data-btn-pass="10" aria-label="Toggle password visibility">
+                                    <svg class="input-user-pass__svg-show-pass" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 32 32" aria-hidden="true">
+                                        <path
+                                                d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                                        </path>
+                                    </svg>
+                                    <svg class="input-user-pass__svg-hide-pass" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 32 32" aria-hidden="true">
+                                        <path
+                                                d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                                        </path>
+                                        <path
+                                                d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                                        </path>
+                                        <path
+                                                d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-user-pass d-api-key__form-line u-width-100">
+                            <div class="input-user-pass__header">
+                                <label for="secter-key">Cекретный ключ</label>
+                            </div>
+                            <div class="input-user-pass__input-wrapper">
+                                {{ form.private_key }}
+                                {% comment %}
+                                <input class="input-text-default" type="password" name="secter-key" id="secter-key"
+                                       placeholder=""
+                                       data-input-pass="11">
+                                {% endcomment %}
+                                <button data-btn-pass="11" aria-label="Toggle password visibility">
+                                    <svg class="input-user-pass__svg-show-pass" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 32 32" aria-hidden="true">
+                                        <path
+                                                d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                                        </path>
+                                    </svg>
+                                    <svg class="input-user-pass__svg-hide-pass" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 32 32" aria-hidden="true">
+                                        <path
+                                                d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                                        </path>
+                                        <path
+                                                d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                                        </path>
+                                        <path
+                                                d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="btn-groups d-api-key__form-group-btn">
+                            <button page-api="api-3" type="button" class="btn-secondary btn-groups__item">Назад</button>
+                            <button type="submit" class="btn-default btn-groups__item">Далее</button>
+                            {# <a data-micromodal-trigger="modal-wrong-key">Popap</a> #}
+                        </div>
+                    </div>
+                    <div class="d-api-key__aside">
+                        <div class="card-info d-api-key__aside-card-info">
+                            <h3 class="card-info__title">Секретный ключ</h3>
+                            <div class="card-info__description">
+                                <p>Секретный ключ отображается только один раз — во время создания API-ключа.</p>
+                                <p>Сохраните себе его данные, чтобы использовать этот API-ключ в дальнейшем.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</form>
+<div class="modal micromodal-slide" id="modal-wrong-key" aria-hidden="false">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+        <div class="m-modal modal__container" role="dialog" aria-modal="true">
+            <button class="modal__close" aria-label="Close modal" data-micromodal-close=""></button>
+            <div class="m-modal__body">
+                <div class="m-modal__trade">
+                    <div class="m-modal__title">Неверные данные</div>
+                    <div id="error-text" class="m-modal__description">
+                        {% if form.errors %}
+                        {{form.non_field_errors}}
+                        {% endif %}
+                    </div>
+                    <button class="btn-default m-modal__btn-trade" data-micromodal-close="">Понятно</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'js/tblock.js' %}"></script>
+<script src="{% static 'js/sign-in.js' %}"></script>
+{% if form.errors %}
+<script>
+    let elems = 'api-4'
+    for (el of document.querySelectorAll('[page-api-block]')) {
+        let atributes = el.getAttribute('id')
+        if (atributes == elems) {
+            document.getElementById(atributes).style.display = 'block'
+        } else {
+            document.getElementById(atributes).style.display = 'none'
+        }
+    }
+    let elem = document.getElementById('modal-wrong-key')
+    open_micro_modal = elem
+    elem.classList.add('is-open')
+</script>
+{% endif %}
+{% endblock %}

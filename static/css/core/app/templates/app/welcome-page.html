@@ -1,0 +1,56 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/welcome-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main">
+      <section class="section-welcome">
+        <div class="section-welcome__logo">
+          <img src="{% static 'img/logo-small.png' %}" alt="Lucky Trade Logo">
+        </div>
+        <div class="section-welcome__info">
+          <h1 class="section-welcome__title">{% translate "Добро пожаловать" %} {% translate "в" %} LuskyTrade!</h1>
+          <p class="section-welcome__text">
+            Lucky Trade {% translate "предоставляет возможность опытным трейдерам зарабатывать на подписках на свои сделки, а инвесторам - начать торговать без каких-либо специальных знаний и опыта." %}
+          </p>
+          <p class="section-welcome__label">{% translate "Выберите свой тариф и поехали!" %}</p>
+        </div>
+        <div class="section-welcome__rate-cards-wrapper rate-cards">
+          <ul class="rate-cards__list">
+            <li class="rate-cards__item">
+              <h2 class="rate-cards__title">Connect Your Exchange</h2>
+              <img src="{% static 'img/rate-icon.png' %}" alt="Alt" class="rate-cards__icon">
+              <p class="rate-cards__text">
+                Connect your exchange accoutn. Currently, Coinmatics supports Binance. OKEx, FTX and Bybit exchanges.
+              </p>
+              <button class="btn-default rate-cards__btn-buy">Buy now!</button>
+            </li>
+            <li class="rate-cards__item">
+              <h2 class="rate-cards__title">Connect Your Exchange</h2>
+              <img src="{% static 'img/rate-icon.png' %}" alt="Alt" class="rate-cards__icon">
+              <p class="rate-cards__text">
+                Connect your exchange accoutn. Currently, Coinmatics supports Binance. OKEx, FTX and Bybit exchanges.
+              </p>
+              <button class="btn-default rate-cards__btn-buy">Buy now!</button>
+            </li>
+            <li class="rate-cards__item">
+              <h2 class="rate-cards__title">Connect Your Exchange</h2>
+              <img src="{% static 'img/rate-icon.png' %}" alt="Alt" class="rate-cards__icon">
+              <p class="rate-cards__text">
+                Connect your exchange accoutn. Currently, Coinmatics supports Binance. OKEx, FTX and Bybit exchanges.
+              </p>
+              <button class="btn-default rate-cards__btn-buy">Buy now!</button>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+{% endblock %}

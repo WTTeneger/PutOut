@@ -1,0 +1,607 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load staticfiles %}
+{% load tag_library %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/general-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main balance-page-main">
+  <div class="d-balance">
+    <div class="container-account d-balance__container">
+      <div class="d-balance__header">
+        <div class="d-balance__header-info">
+          <div class="d-balance-card">
+            {% comment %}
+            <p>
+              <a data-micromodal-trigger="modal-balance-1">modal-balance-1</a>
+              <a data-micromodal-trigger="modal-balance-2">modal-balance-2</a>
+              <a data-micromodal-trigger="modal-balance-3">modal-balance-3</a>
+            </p>
+            {% endcomment %}
+            <h1 class="d-balance-card__title">{% trans 'Баланс' %}</h1>
+            <div class="d-balance-card__info-list">
+              <div class="d-balance-card__info-card d-balance-card__info-card--amount">
+                <div class="d-balance-card__info-card-title">{% translate 'Всего' %}</div>
+                <div class="d-balance-card__info-card-amount">{{balance|addf:bonus_balance}} USD</div>
+              </div>
+              <div class="d-balance-card__info-card">
+                <div class="d-balance-card__info-card-title">{% translate 'Баланс' %}</div>
+                <div class="d-balance-card__info-card-amount">{{balance}} USD</div>
+              </div>
+              <div class="d-balance-card__info-card">
+                <div class="d-balance-card__info-card-title">{% trans 'Бонус (недоступен для вывода)' %}
+                  <span class="d-tip" data-tooltip="Ваш бонус, заработанный по нашей реферальной программе. Если бонус доступен для вывода, он будет использован в первую очередь."></span>
+                </div>
+                <div class="d-balance-card__info-card-amount">{{bonus_balance|addf:0}} USD</div>
+              </div>
+            </div>
+            <div class="btn-groups d-balance-card__btn-groups">
+              <button type="button" class="btn-default btn-groups__item" data-micromodal-trigger="modal-balance-2">
+                {% trans 'Пополнить баланс' %}
+              </button>
+              <button type="button" class="btn-secondary btn-groups__item" data-micromodal-trigger="modal-balance-5">
+                {% trans 'Вывести средства' %}
+              </button>
+            </div>
+          </div>
+        </div>
+        <section class="d-balance__header-content">
+          <img src="{% static 'img/icons/money.svg' %}" alt="Зарабатывайте больше" class="d-balance__header-content-icon">
+          <h2 class="d-balance__header-content-title">{% trans 'Зарабатывайте больше' %}</h2>
+          <div class="d-balance__header-content-text">
+            <p>LuckyTrader-коин (LTC) – {% trans 'это наша внутренняя валюта. На 2-ом уровне LTC можно конвертировать и выводить.' %}
+              1 LTC = 1 USD.</p>
+          </div>
+          <a href="#" class="d-balance__header-content-moore-link">{% trans 'Подробнее' %}</a>
+        </section>
+      </div>
+      <div class="d-balance__table">
+        <div class="d-balance__table-title">{% trans 'История транзакций' %}</div>
+        <div class="d-balance__table-header">
+          <div class="d-balance__table-header-item">
+            <div class="d-balance__table-header-item-title">{% trans 'Тип' %}</div>
+            <div class="custom-select d-balance__table-header-item-select">
+              <select name="select" class="SVS custom-select__select-default"
+                      onchange="ch_l(this)">
+                <option value="&o=all">{% trans 'Все' %}</option>
+                {% for el in filter.type %}
+                  <option value="&o={{el.0}}" {% if o == el.0 %} selected {% endif %}>{% trans el.1 %}</option>
+                {% endfor %}
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                   class="custom-select__arrow">
+                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="d-balance__table-header-item">
+            <div class="d-balance__table-header-item-title">{% trans 'Способ' %}</div>
+
+            <div class="custom-select d-balance__table-header-item-select">
+              <select name="select" class="SVS custom-select__select-default"
+                      onchange="ch_l(this)">
+                <option value="&t=all">{% trans 'Все' %}</option>
+                {% for el in filter.type_pay %}
+                  <option value="&t={{el.0}}" {% if t == el.0 %} selected {% endif %}>{% trans el.1 %}</option>
+                {% endfor %}
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                   class="custom-select__arrow">
+                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="d-balance__table-header-item d-balance__table-header-item--right">
+            <div class="d-balance__table-header-item-title">Статус</div>
+            <div class="custom-select d-balance__table-header-item-select">
+              <select name="select" class="SVS custom-select__select-default" onchange="ch_l(this)">
+
+                <option value="&s=all">{% trans 'Все' %}</option>
+                {% for el in filter.status %}
+                  <option value="&s={{el.0}}" {% if s == el.0 %} selected {% endif %}>{% trans el.1 %}</option>
+                {% endfor %}
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                   class="custom-select__arrow">
+                <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="d-table d-balance__table-el">
+          <div class="d-table__row d-table__row--header">
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">Сумма</div>
+            </div>
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">Тип</div>
+            </div>
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">Способ</div>
+            </div>
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">
+                <button type="button" class="d-btn-filter">Дата создания</button>
+              </div>
+            </div>
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">Дата окончания</div>
+            </div>
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">Статус</div>
+            </div>
+            <div class="d-table__row-col">
+              <div class="d-table__row-col-inner">Подробности</div>
+            </div>
+          </div>
+          {% for el in transactions %}
+          <div id="wv_{{el.uuid}}" class="d-table__row d-table__row--body {% if el.status == '3' or el.status == '4' %} d-table__row--disabled {% endif %}">
+            <div class="d-table__row-col" data-table-title="Сумма">
+              <div class="d-table__row-col-inner">
+                <div class="d-table__amount d-table__amount--plus">
+                  <svg class="u-icon d-table__amount-icon">
+                    <use xlink:href="{% static 'img/svg/plus.svg' %}"></use>
+                  </svg>
+                  <span class="d-table__amount-title">{% if el.total %} {{el.total}} USD {% else%} - {% endif %}</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-table__row-col" data-table-title="Тип">
+              <div class="d-table__row-col-inner"> {{el.ORDER_TYPE|get_item:el.type}}</div>
+            </div>
+            <div class="d-table__row-col" data-table-title="Способ">
+              <div class="d-table__row-col-inner">{{el.ORDER_TYPE_PAY|get_item:el.type_pay}}</div>
+            </div>
+            <div class="d-table__row-col" data-table-title="Дата создания">
+              <div class="d-table__row-col-inner x-data-create">{{el.data}}</div>
+            </div>
+            <div class="d-table__row-col" style="display: none;" data-table-title="Описание">
+              <div class="d-table__row-col-inner x-data-descriptions">{{el.descriptions}}</div>
+            </div>
+            <div class="d-table__row-col" data-table-title="Дата окончания">
+              <div class="d-table__row-col-inner">{{el.data_end}}</div>
+            </div>
+            <div class="d-table__row-col" data-table-title="Статус">
+              <div id_db="{{el.status}}" class="d-status d-table__row-col-inner">{{el.ORDER_STATUS|get_item:el.status}}</div>
+            </div>
+            <div class="d-table__row-col" data-table-title="Подробности">
+              <div class="d-table__row-col-inner">
+                <button type="button" class="d-table__qr-code
+                {% if el.type_pay == 'Card' %} d-table__card {% elif el.type_pay == 'Balance' %} d-table__money {% endif %}"
+                {% if el.status != '3' and el.status != '4' and el.status != '5' %}
+                  {% if el.type_pay == 'Card' %}  to-new-url="{{el.payment_url}}"
+                  {% elif el.type_pay == 'Balance' %} dmtb_uuid = 'wv_{{el.uuid}}'
+                  {% elif el.type_pay == 'Crypto' %} dmt_uuid = 'wv_{{el.uuid}}'
+                  {% endif %}>
+                {% else %}
+                  dmtb_uuid = 'wv_{{el.uuid}}'
+                {% endif %}>
+                  <svg class="u-icon d-table__qr-code-icon">
+                    <use xlink:href="{% static 'img/svg/qrcode.svg' %}"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal micromodal-slide" id="modal-balance-1" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal-balance">
+          <form class="m-modal-balance__add" action="#">
+            <div class="m-modal-balance__add-title">Пополнение баланса</div>
+            <div class="row m-modal-balance__add-row">
+              <div class="col-7 m-modal-balance__add-col--method">
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-1" class="input-el__label">Метод пополнения</label>
+                  <div class="input-el__wrapper">
+                    <div class="custom-select input-el__area">
+                      <select name="select" class="custom-select__select-default" id="m-balance-1">
+                        <option value="Crypto">Crypto</option>
+                      </select>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           class="custom-select__arrow">
+                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 m-modal-balance__add-col--currency">
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-2" class="input-el__label">Монета</label>
+                  <div class="input-el__wrapper">
+                    <div class="custom-select input-el__area">
+                      <select  name="select" class="custom-select__select-default" id="m-balance-2">
+                        <option value="BTC">BTC</option>
+                        <option value="USDT (TRC20)">USDT (TRC20)</option>
+                      </select>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           class="custom-select__arrow">
+                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+              <svg class="u-icon d-alert__icon">
+                <use xlink:href="{% static cripto.USDT_QRCODE.url %}"></use>
+              </svg>
+              <div class="d-alert__text">Нажмите кнопку внизу, и система сгенерирует QR-код и USDT (TRC20)-адрес для
+                зачисления средств.
+              </div>
+            </div>
+
+            <button class="btn-default m-modal-balance__add-btn" data-micromodal-close>Сгенерировать</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal micromodal-slide {% if form.errors %}is-open{% endif %}" id="modal-balance-2" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal-balance">
+          <form class="m-modal-balance__add" action="{% url 'appBalance' 'replenishment' %}" method="post">
+            {% csrf_token %}
+            <div class="m-modal-balance__add-title">Пополнение баланса
+              <div class="d-alert__text" style="color: red;" id="errors">
+              {{ form.non_field_errors }}
+            </div></div>
+            <div class="row m-modal-balance__add-row">
+              <div style="max-width: none; flex-basis: auto;" class="col-7 m-modal-balance__add-col-c-method">
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-1" class="input-el__label">Метод пополнения</label>
+                  <div class="input-el__wrapper">
+                    <div class="custom-select input-el__area">
+                      {{form.place}}
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           class="custom-select__arrow">
+                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 m-modal-balance__add-col--currency AChanger Crypto">
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-2" class="input-el__label">Монета</label>
+                  <div class="input-el__wrapper">
+                    <div class="custom-select input-el__area">
+                      {{form.coin}}
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           class="custom-select__arrow">
+                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 m-modal-balance__add-col--amount">
+                <div class="input-el m-modal-balance__add-line AChanger Crypto">
+                  <label for="m-balance-3" class="input-el__label">{% trans 'Адрес кошелька' %}</label>
+                  <div class="input-el__wrapper">
+                    {{form.address}}
+                  </div>
+                </div>
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-3" class="input-el__label">{% trans 'Сумма' %}</label>
+                  <div class="input-el__wrapper">
+                    {{form.total}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="AChanger Crypto">
+              <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                <div class="d-alert__text"> Мы используем ваш адрес для индексации вашего платежа. Нажмите кнопку внизу,
+                  и система сгенерирует QR-код и USDT (TRC20)-адрес для
+                  зачисления средств.
+                </div>
+              </div>
+              <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+                <img class="u-icon d-alert__icon" src="{% static 'img/svg/warning.svg' %}">
+                <div class="d-alert__text">
+                  {% trans 'Переводите только ту сумму, которую задали в данной форме. Отправка другой суммы приведет к задержке пополнения.' %}
+                </div>
+              </div>
+              <button type="submit" class="btn-default m-modal-balance__add-btn">{% trans 'Сгенерировать' %}</button>
+            </div>
+            <div class="AChanger Card" style="display: none;">
+              <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                <div class="d-alert__text">{% trans 'Мы используем платежный сервис Prodamus, он принемает только российские карты' %}
+                </div>
+              </div>
+              <button type="submit" class="btn-default m-modal-balance__add-btn">{% trans 'Сгенерировать' %}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---->
+<div class="modal micromodal-slide {% if formWithdrawal.errors %}is-open{% endif %}"
+     id="modal-balance-5" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal-balance">
+          <form class="m-modal-balance__add" action="{% url 'appBalance' 'withdrawal' %}" method="post">
+            {% csrf_token %}
+            <div class="m-modal-balance__add-title">Вывод средств
+              <div class="d-alert__text" style="color: red;" id="errors">
+                {{formWithdrawal.error.not_user}}
+                {{formWithdrawal.error.not_correct_money}}
+              </div>
+            </div>
+
+            <div class="row m-modal-balance__add-row">
+              <div style="max-width: none; flex-basis: auto;" class="col-7 m-modal-balance__add-col-c-method">
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-1" class="input-el__label">Метод вывода</label>
+                  <div class="input-el__wrapper">
+                    <div class="custom-select input-el__area">
+                      {{formWithdrawal.place}}
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           class="custom-select__arrow">
+                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 m-modal-balance__add-col--currency AChanger Crypto">
+                <div class="input-el m-modal-balance__add-line">
+                  <label for="m-balance-2" class="input-el__label">Монета</label>
+                  <div class="input-el__wrapper">
+                    <div class="custom-select input-el__area">
+                      {{formWithdrawal.coin}}
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           class="custom-select__arrow">
+                        <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 m-modal-balance__add-col--amount">
+                <div class="input-el m-modal-balance__add-line AChanger Crypto">
+                  <label for="m-balance-3" class="input-el__label">{% trans 'Адрес кошелька' %}</label>
+                  <div class="input-el__wrapper">
+                    <div class="d-alert__text" style="color: red;" id="errors">
+                        {{formWithdrawal.error.not_correct_address}}
+                    </div>
+                    {{formWithdrawal.address}}
+                  </div>
+                </div>
+                <div class="input-el m-modal-balance__add-line">
+
+                  <label for="m-balance-3" class="input-el__label" style="display: flex; align-items: flex-end;">{% trans 'Сумма к выводу' %}
+                    <h4 style="font-size: 12px; padding-left: 10px; color: #000000c7;">(Минимально 50 USD)</h4>
+                  </label>
+                  <div class="d-alert__text" style="color: red;" id="errors">
+                      {{formWithdrawal.error.total_low50USD}}
+                  </div>
+                  <div class="input-el__wrapper">
+                    {{formWithdrawal.total}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="AChanger Crypto">
+              <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                <div class="d-alert__text"> Мы используем ваш адрес для отправки денег.
+                </div>
+              </div>
+              <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+                <img class="u-icon d-alert__icon" src="{% static 'img/svg/warning.svg' %}">
+                <div class="d-alert__text">В сумму не учтена коммисия блокчейна
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-default m-modal-balance__add-btn">Вывести</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-balance-3" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal-balance">
+          <form class="m-modal-balance__add" action="#">
+             <div class="m-modal-balance__add-card-list">
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title">Статус</div>
+                <div class="m-status m-modal-balance__add-card-amount">Выполнен</div>
+              </div>
+            </div>
+            <div class="m-modal-balance__add-card-list">
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title">Сумма</div>
+                <div class="m-total m-modal-balance__add-card-amount">2.00 USDT</div>
+              </div>
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title">Дата создания</div>
+                <div class="m-data-start m-modal-balance__add-card-amount">21 Май 2022 17:33:20</div>
+              </div>
+            </div>
+            <div class="m-modal-balance__add-address">
+              <div class="m-modal-balance__add-address-title">Адрес</div>
+              <div class="m-modal-balance__add-address-text">Скопируйте USDT (TRC20)-адрес или QR-код ниже, чтобы
+                пополнить баланс LuckyTrader.
+              </div>
+            </div>
+            <div class="m-modal-balance__add-code">
+              <div class="m-modal-balance__add-code-content">
+                <div class="m-modal-balance__add-code-title">Адрес USDT (TRC20) кошелька</div>
+                <div id="xHash" class="m-modal-balance__add-code-area">{{cripto.USDT_Address}}</div>
+                <button copy-text="xHash" type="button" class="btn-secondary m-modal-balance__add-code-btn">Скопировать</button>
+              </div>
+              <div class="m-modal-balance__add-code-inner">
+                <div class="m-modal-balance__add-code-inner-title">QR-код</div>
+                <div class="m-modal-balance__add-code-inner-picture">
+                  <img src="{{ cripto.USDT_QRCODE.url }}">
+                </div>
+              </div>
+            </div>
+            <div class="m-modal-balance__add-address stats">
+              <button urls="{% url 'appTransactionsSetStatus' 'IDS' 'STS' %}" style="width: 100%;" type="button" class="p-to-url btn-default btn-groups__item"
+                      ata-micromodal-trigger="modal-balance-2">
+                Я оплатил
+              </button>
+           </div>
+            <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+              <svg class="u-icon d-alert__icon">
+                <use xlink:href="{% static 'img/svg/warning.svg' %}"></use>
+              </svg>
+              <div class="d-alert__text">Отправляйте только USDT через сеть Tron (TRC20). Если вы отправите другие
+                монеты или токены, вы можете их потерять.
+              </div>
+            </div>
+            <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+              <svg class="u-icon d-alert__icon">
+                <use xlink:href="{% static 'img/svg/warning.svg' %}"></use>
+              </svg>
+              <div class="d-alert__text">Переводите только ту сумму, которую задали в данной форме. Отправка другой
+                суммы приведет к задержке пополнения.
+              </div>
+            </div>
+            <div class="m-modal-balance__add-footer">
+              <div class="m-modal-balance__add-footer-text">Среднее время обработки: 12 часов.</div>
+              <a href="https://coinmatics.zendesk.com/hc/ru/articles/360017040678-%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D1%8C-%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81-%D0%BD%D0%B0-Coinmatics"
+                 class="m-modal-balance__add-footer-link-moore" target="_blank">Нужна помощь?</a>
+            </div>
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title"></div>
+                <div style="font-size: 30%; text-align: center" class="m-uuid m-modal-balance__add-card-amount">uuid</div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal micromodal-slide" id="modal-balance-4" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal-balance">
+          <form class="m-modal-balance__add" action="#">
+             <div class="m-modal-balance__add-card-list">
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title">Статус</div>
+                <div class="m-status m-modal-balance__add-card-amount">Выполнен</div>
+              </div>
+            </div>
+            <div class="m-modal-balance__add-card-list">
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title">Сумма</div>
+                <div class="m-total m-modal-balance__add-card-amount">2.00 USDT</div>
+              </div>
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title">Дата создания</div>
+                <div class="m-data-start m-modal-balance__add-card-amount">21 Май 2022 17:33:20</div>
+              </div>
+            </div>
+            <div class="m-modal-balance__add-address">
+              <div class="m-modal-balance__add-address-title">Описание</div>
+              <div class="m-descriptions m-modal-balance__add-address-text"> </div>
+            </div>
+            <div class="m-modal-balance__add-footer">
+              <div class="m-modal-balance__add-footer-text">Среднее время обработки: 12 часов.</div>
+              <a href="https://coinmatics.zendesk.com/hc/ru/articles/360017040678-%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D1%8C-%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81-%D0%BD%D0%B0-Coinmatics"
+                 class="m-modal-balance__add-footer-link-moore" target="_blank">Нужна помощь?</a>
+            </div>
+              <div class="m-modal-balance__add-card">
+                <div class="m-modal-balance__add-card-title"></div>
+                <div style="font-size: 30%; text-align: center" class="m-uuid m-modal-balance__add-card-amount">uuid</div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/tblock.js' %}"></script>
+
+{% if not verified and not make_order %}
+<div class="modal micromodal-slide is-open" id="modal-not-verivied" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal-balance">
+          <form class="m-modal-balance__add" action="#">
+            <div class="m-modal-balance__add-address">
+              <div class="m-modal-balance__add-address-title">Оплата входа</div>
+              <div class="m-modal-balance__add-address-text">
+                Для возможности пользоваться сервисом вам нужно оплатить стартовый сбор равный
+                <a style="font-style: oblique;">150</a> USD
+              </div>
+            </div>
+            <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+              <div class="d-alert__text">После оплаты мы дадим вам 1 месяц с любым трейдером.
+              </div>
+            </div>
+            <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+              <img class="u-icon d-alert__icon" src="{% static 'img/svg/warning.svg' %}">
+              <div class="d-alert__text">Пока перевод не будет проверен мы вынуждены переносить вас на данную страницу.
+              </div>
+            </div>
+
+          </form>
+          <div style="width: 100%; background: none;" class="d-alert">
+            <button data-micromodal-close style="width: 100%;" type="button" class="btn-secondary btn-groups__item">
+              {% trans 'Понял' %}
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script href="{% static 'js/tblock.js' %}"></script>
+{% endif %}
+<script>
+
+  {% if form.non_field_errors %}
+  open_micro_modal = document.getElementById('modal-balance-2')
+  {% else %}
+  open_micro_modal = document.getElementById('modal-not-verivied')
+  {% endif %}
+</script>
+{% endblock %}
+

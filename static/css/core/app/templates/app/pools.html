@@ -1,0 +1,76 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/general-page.css' %}" type="text/css">
+<script src="{% static '/js/tblock.js' %}"></script>
+<link href="{% static 'css/catalog-page.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main">
+    <section class="section-catalog-info">
+        <div class="section-catalog-info__logo">
+            <img src="{% static 'img/logo/logo-small.svg' %}" alt="Lucky Trade Logo">
+        </div>
+        <div class="section-catalog-info__info">
+            <h1 class="section-catalog-info__title">{% translate "Пуллы инвестиций" %}</h1>
+            <p class="section-catalog-info__text">{% translate "Оплатите вход в пул, а дальше все сделает трейдер" %}</p>
+        </div>
+    </section>
+    <section class="section-top-strategies">
+        <h2 class="section-top-strategies__title">{% translate "Лучшие пуллы" %}</h2>
+        <div class="section-top-strategies__top-strategies-wrapper">
+            <ul class="section-top-strategies__top-strategies top-strategies">
+                {% for el in pools %}
+                    <li class="top-strategies__item" to-url="{% url 'appPool' el.id %}">
+                    <p class="top-strategies__verification">{% trans "Верифицированный пулл" %}</p>
+                    <h3 class="top-strategies__title">
+                        <img src="{% static 'img/icons/checkmark-2.svg' %}" alt="Checkmark Icon">
+                        {{el.title}}
+                    </h3>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Уже собранно" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">{{el.now_total}} USD</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Максимально" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">{{el.max_total}} USD</p>
+                        </li>
+                    </ul>
+                    <div class="top-pool__progress">
+                        <div class="progress_line">
+                            <div class="progress" style="width: {{el.percent}}%;"></div>
+                        </div>
+                    </div>
+                    <ul class="top-strategies__info">
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Срок вклада" %}</p>
+                            <p class="top-strategies__info-value">{{el.total_day}} {% trans "Дней" %}</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Статус" %}</p>
+                            <p class="top-strategies__info-value">{% if el.status%}В работе{%else%}Наполняется{%endif%}</p>
+                        </li>
+                        <li class="top-strategies__info-item">
+                            <p class="top-strategies__info-name">{% translate "Рейтинг" %}</p>
+                            <p class="top-strategies__info-value top-strategies__info-value_num">
+                                <img src="{% static 'img/icons/crown.png' %}" alt="Crown">
+                                {{el.rating}}
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</main>
+{% endblock %}

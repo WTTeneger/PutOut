@@ -1,0 +1,155 @@
+.section-features {
+  position: relative;
+  background-color: var(--app-color-green-6);
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    top: -240px;
+    left: 0;
+    background-image: url('../img/waves/wave-2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    @include media-xl {
+      background-size: auto 100%;
+      background-position: center;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-bottom: 190px;
+
+    @include media-lg {
+      padding-bottom: 100px;
+    }
+  }
+
+  &__logo {
+    width: 120px;
+    height: 90px;
+    margin-top: -70px;
+    flex-shrink: 0;
+    margin-bottom: 40px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain
+    }
+  }
+
+  &__title {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 35px;
+    color: #fff;
+    font-size: var(--app-font-size-6);
+    line-height: 1.424;
+    text-align: center;
+
+    span {
+      color: var(--app-color-green-2);
+    }
+  }
+
+  &__info {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 60px;
+    color: var(--app-color-grey-8);
+    font-size: var(--app-font-size-3);
+    font-weight: 300;
+    line-height: 1.424;
+    text-align: center;
+  }
+
+  &__features-wrapper {
+    width: 100%;
+    max-width: 1270px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__features-list {}
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -30px -10px;
+
+  @include media-lg {
+    margin: -20px -10px;
+  }
+
+  @include media-md {
+    margin: -15px 0;
+  }
+
+  &__item {
+    width: calc(100% / 3 - 20px);
+    margin: 30px 10px;
+    flex-shrink: 1;
+
+    @media screen and (max-width: 1350px) {
+      width: calc(100% / 3 - 20px);
+    }
+
+    @include media-lg {
+      width: calc(100% / 2 - 20px);
+      margin: 20px 10px;
+      max-width: 100%;
+    }
+
+    @include media-md {
+      width: 100%;
+      margin: 15px 0;
+    }
+  }
+
+  &__item-inner {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+
+    @include media-md {
+      max-width: 100%;
+    }
+  }
+
+  &__img {
+    display: block;
+    flex-shrink: 0;
+    margin: 5px 20px auto 0;
+    object-fit: contain;
+
+    @include media-xs {
+      width: 60px;
+      margin-right: 10px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    color: var(--app-color-green-4);
+    line-height: 1.424;
+    font-size: var(--app-font-size-3);
+  }
+
+  &__text {
+    color: var(--app-color-grey-9);
+    line-height: 1.424;
+    font-size: var(--app-font-size-3);
+  }
+}

@@ -1,0 +1,41 @@
+.section-trade-info {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 40px 20px;
+  border-radius: 10px;
+  background-color: var(--app-color-grey-3);
+
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: var(--app-color-grey-4);
+    font-size: var(--app-font-size-7);
+    line-height: 1.424;
+    text-align: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      flex-shrink: 0;
+
+      @include media-sm {
+        display: none;
+      }
+    }
+  }
+
+  &__text {
+    width: 100%;
+    max-width: 870px;
+    color: var(--app-color-grey-4);
+    line-height: 1.424;
+    text-align: center;
+    font-size: var(--app-font-size-3);
+    font-weight: 300;
+  }
+}

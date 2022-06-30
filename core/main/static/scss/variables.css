@@ -1,0 +1,18 @@
+:root {
+  --app-color-dark: #282828;
+  --app-text-color-main: #818181;
+  --app-brand-color: #37b1a0;
+  --app-side-padding: 20px;
+  --app-account-aside-width: 300px;
+  --app-account-header-height: 90px;
+}
+@media screen and (max-width: 480px) {
+  :root {
+    --app-side-padding: 10px;
+  }
+}
+@media screen and (max-width: 480px) {
+  :root {
+    --app-account-aside-width: 250px;
+  }
+}

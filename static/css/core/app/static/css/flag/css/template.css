@@ -1,0 +1,47 @@
+.clear
+{
+	clear:both;
+}
+
+
+select
+{
+	width: 200px;
+}
+
+option
+{
+	padding-left: 20px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+option:hover
+{
+	background-color: #eee;
+}
+
+.icon-ok
+{
+	background: url('../images/icon-ok.png') no-repeat;
+	background-size: 20px;
+	padding-left: 20px;
+	background-position: 0 1px;
+}
+
+.icon-error
+{
+	background: url('../images/icon-fail.png') no-repeat;
+	background-size: 20px;
+	padding-left: 20px;
+	background-position: 0 1px;
+}
+
+select.icon-ok,
+select.icon-error
+{
+	padding-top: 2px;
+	padding-bottom: 3px;
+	padding-left: 16px;
+	background-position: 0 1px;
+}

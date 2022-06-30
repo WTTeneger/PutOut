@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyTrade</title>
+  <link rel="icon" href="./favicon.ico">
+  <link href="./assets/css/variables.css" rel="stylesheet">
+  <link href="./assets/css/general-page.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="page-account">
+    <aside class="page-account__aside account-aside" id="account-aside" data-aside>
+      <a href="#" class="account-aside__logo">
+        <img src="./assets/img/logo/logo.svg" alt="Lucky Trade Logo">
+      </a>
+      <nav class="account-aside__nav aside-nav">
+        <ul class="aside-nav__list">
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link aside-nav__link_active">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="22.5px" height="21.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.882,1.488 L14.284,1.488 L14.284,13.413 L1.882,13.413 L1.882,1.488 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M7.882,7.488 L20.283,7.488 L20.283,19.413 L7.882,19.413 L7.882,7.488 Z" />
+              </svg>
+              Courses
+            </a>
+          </li>
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="19.5px" height="19.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z" />
+              </svg>
+              Copy Trading
+            </a>
+          </li>
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="20.5px" height="19.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,1.647 L18.277,1.647 L18.277,5.76 L1.134,5.76 L1.134,1.647 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,7.647 L18.277,7.647 L18.277,11.76 L1.134,11.76 L1.134,7.647 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,13.647 L18.277,13.647 L18.277,17.76 L1.134,17.76 L1.134,13.647 Z" />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <header class="page-account__header account-header">
+      <button class="account-header__btn-nav-toggle hamburger hamburger_type2" aria-label="Toggle aside"
+        aria-expanded="false" aria-controls="account-aside" type="button" data-btn-aside-toggle>
+        <span class="hamburger-box" aria-hidden="true">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <div class="account-header__balance user-balance">
+        <p class="user-balance__label">LuckyTrade Balance</p>
+        <p class="user-balance__value">137.026 USD</p>
+      </div>
+      <div class="dropdown account-header__dropdown-user dropdown-user" data-dropdown>
+        <button class="dropdown__btn" data-dropdown-btn>
+          <div class="dropdown-user__photo">
+            <img src="./assets/img/user.png" alt="User Photo">
+          </div>
+          <span class="dropdown-user__name">UserName661</span>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+            <path fill-rule="evenodd" d="M0.0,0.947 L6.149,7.96 L12.298,0.947 L0.0,0.947 Z" />
+          </svg>
+        </button>
+        <div class="dropdown__drop">
+          <ul class="dropdown-user__links">
+            <li><a href="#">Настройки</a></li>
+            <li><a href="#">Выйти</a></li>
+            <li><a href="#">...</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="page-account__main balance-page-main">
+      <div class="d-balance">
+        <div class="container-account d-balance__container">
+          <div class="d-balance__header">
+            <div class="d-balance__header-info">
+              <div class="d-balance-card">
+                <p>
+                  <a data-micromodal-trigger="modal-balance-1">modal-balance-1</a>
+                  <a data-micromodal-trigger="modal-balance-2">modal-balance-2</a>
+                  <a data-micromodal-trigger="modal-balance-3">modal-balance-3</a>
+                </p>
+                <h1 class="d-balance-card__title">Баланс</h1>
+                <div class="d-balance-card__info-list">
+                  <div class="d-balance-card__info-card d-balance-card__info-card--amount">
+                    <div class="d-balance-card__info-card-title">Всего</div>
+                    <div class="d-balance-card__info-card-amount">0 USD</div>
+                  </div>
+                  <div class="d-balance-card__info-card">
+                    <div class="d-balance-card__info-card-title">Баланс</div>
+                    <div class="d-balance-card__info-card-amount">0 USD</div>
+                  </div>
+                  <div class="d-balance-card__info-card">
+                    <div class="d-balance-card__info-card-title">Бонус (недоступен для вывода) <span class="d-tip" data-tooltip="Ваш бонус, заработанный по нашей реферальной программе. Если бонус доступен для вывода, он будет использован в первую очередь."></span></div>
+                    <div class="d-balance-card__info-card-amount">0 USD</div>
+                  </div>
+                </div>
+                <div class="btn-groups d-balance-card__btn-groups">
+                  <button type="button" class="btn-default btn-groups__item" data-micromodal-trigger="modal-balance-1">Пополнить баланс</button>
+                  <button type="button" class="btn-secondary btn-groups__item">Вывести средства</button>
+                </div>
+              </div>
+            </div>
+            <section class="d-balance__header-content">
+              <img src="./assets/img/icons/money.svg" alt="Зарабатывайте больше" class="d-balance__header-content-icon">
+              <h2 class="d-balance__header-content-title">Зарабатывайте больше</h2>
+              <div class="d-balance__header-content-text">
+                <p>Coinmatics-коин (CMTS) – это наша внутренняя валюта. На 2-ом уровне CMTS можно конвертировать и выводить. 1 CMTS = 1 USD.</p>
+              </div>
+              <a href="#" class="d-balance__header-content-moore-link">Подробнее</a>
+            </section>
+          </div>
+          <div class="d-balance__table">
+            <div class="d-balance__table-title">История транзакций</div>
+            <div class="d-balance__table-header">
+              <div class="d-balance__table-header-item">
+                <div class="d-balance__table-header-item-title">Тип</div>
+                <div class="custom-select d-balance__table-header-item-select">
+                  <select name="select" class="custom-select__select-default">
+                    <option value="Все операции">Все операции</option>
+                    <option value="Все операции">Все операции</option>
+                    <option value="Все операции">Все операции</option>
+                    <option value="Все операции">Все операции</option>
+                    <option value="Все операции">Все операции</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="d-balance__table-header-item">
+                <div class="d-balance__table-header-item-title">Период</div>
+                <div class="custom-select d-balance__table-header-item-select">
+                  <select name="select" class="custom-select__select-default">
+                    <option value="Всё время">Всё время</option>
+                    <option value="Всё время">Всё время</option>
+                    <option value="Всё время">Всё время</option>
+                    <option value="Всё время">Всё время</option>
+                    <option value="Всё время">Всё время</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="d-balance__table-header-item d-balance__table-header-item--right">
+                <div class="d-balance__table-header-item-title">Транзакций на странице</div>
+                <div class="custom-select d-balance__table-header-item-select">
+                  <select name="select" class="custom-select__select-default">
+                    <option value="10">10</option>
+                    <option value="10">10</option>
+                    <option value="10">10</option>
+                    <option value="10">10</option>
+                    <option value="10">10</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="d-table d-balance__table-el">
+              <div class="d-table__row d-table__row--header">
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">Сумма</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">Тип</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-btn-filter">Дата создания</button>
+                  </div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">Дата окончания</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">Статус</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">Подробности</div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--plus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#plus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--minus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#minus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--plus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#plus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--minus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#minus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--plus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#plus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--minus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#minus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--plus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#plus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--minus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#minus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body d-table__row--disabled">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--minus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#minus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-table__row d-table__row--body d-table__row--disabled">
+                <div class="d-table__row-col" data-table-title="Сумма">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__amount d-table__amount--minus">
+                      <svg class="u-icon d-table__amount-icon"><use xlink:href="./assets/img/svg/sprite.svg#minus"></use></svg>
+                      <span class="d-table__amount-title">-</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Тип">
+                  <div class="d-table__row-col-inner">Пополнение</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата создания">
+                  <div class="d-table__row-col-inner">20 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Дата окончания">
+                  <div class="d-table__row-col-inner">27 Май 2022 15:04:53</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Статус">
+                  <div class="d-table__row-col-inner">В ожидании</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="Подробности">
+                  <div class="d-table__row-col-inner">
+                    <button type="button" class="d-table__qr-code" data-micromodal-trigger="modal-balance-3">
+                      <svg class="u-icon d-table__qr-code-icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal micromodal-slide" id="modal-balance-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="m-modal modal__container" role="dialog" aria-modal="true">
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        <div class="m-modal__body">
+          <div class="m-modal-balance">
+            <form class="m-modal-balance__add" action="#">
+              <div class="m-modal-balance__add-title">Пополнение баланса</div>
+              <div class="row m-modal-balance__add-row">
+                <div class="col-7 m-modal-balance__add-col--method">
+                  <div class="input-el m-modal-balance__add-line">
+                    <label for="m-balance-1" class="input-el__label">Метод пополнения</label>
+                    <div class="input-el__wrapper">
+                      <div class="custom-select input-el__area">
+                        <select name="select" class="custom-select__select-default" id="m-balance-1">
+                          <option value="Crypto">Crypto</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          class="custom-select__arrow">
+                          <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-5 m-modal-balance__add-col--currency">
+                  <div class="input-el m-modal-balance__add-line">
+                    <label for="m-balance-2" class="input-el__label">Монета</label>
+                    <div class="input-el__wrapper">
+                      <div class="custom-select input-el__area">
+                        <select name="select" class="custom-select__select-default" id="m-balance-2">
+                          <option value="BTC">BTC</option>
+                          <option value="USDT (TRC20)">USDT (TRC20)</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          class="custom-select__arrow">
+                          <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                <svg class="u-icon d-alert__icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                <div class="d-alert__text">Нажмите кнопку внизу, и система сгенерирует QR-код и USDT (TRC20)-адрес для зачисления средств.</div>
+              </div>
+              <button class="btn-default m-modal-balance__add-btn" data-micromodal-close>Сгенерировать</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal micromodal-slide" id="modal-balance-2" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="m-modal modal__container" role="dialog" aria-modal="true">
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        <div class="m-modal__body">
+          <div class="m-modal-balance">
+            <form class="m-modal-balance__add" action="#">
+              <div class="m-modal-balance__add-title">Пополнение баланса</div>
+              <div class="row m-modal-balance__add-row">
+                <div class="col-7 m-modal-balance__add-col--method">
+                  <div class="input-el m-modal-balance__add-line">
+                    <label for="m-balance-1" class="input-el__label">Метод пополнения</label>
+                    <div class="input-el__wrapper">
+                      <div class="custom-select input-el__area">
+                        <select name="select" class="custom-select__select-default" id="m-balance-1">
+                          <option value="Crypto">Crypto</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          class="custom-select__arrow">
+                          <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-5 m-modal-balance__add-col--currency">
+                  <div class="input-el m-modal-balance__add-line">
+                    <label for="m-balance-2" class="input-el__label">Монета</label>
+                    <div class="input-el__wrapper">
+                      <div class="custom-select input-el__area">
+                        <select name="select" class="custom-select__select-default" id="m-balance-2">
+                          <option value="BTC">BTC</option>
+                          <option value="USDT (TRC20)">USDT (TRC20)</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          class="custom-select__arrow">
+                          <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 m-modal-balance__add-col--amount">
+                  <div class="input-el m-modal-balance__add-line">
+                    <label for="m-balance-3" class="input-el__label">Сумма</label>
+                    <div class="input-el__wrapper">
+                      <input type="text" class="u-input input-el__area" name="m-balance-3" id="m-balance-3" placeholder="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                <svg class="u-icon d-alert__icon"><use xlink:href="./assets/img/svg/sprite.svg#qrcode"></use></svg>
+                <div class="d-alert__text">Нажмите кнопку внизу, и система сгенерирует QR-код и USDT (TRC20)-адрес для зачисления средств.</div>
+              </div>
+              <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+                <svg class="u-icon d-alert__icon"><use xlink:href="./assets/img/svg/sprite.svg#warning"></use></svg>
+                <div class="d-alert__text">Переводите только ту сумму, которую задали в данной форме. Отправка другой суммы приведет к задержке пополнения.</div>
+              </div>
+              <button class="btn-default m-modal-balance__add-btn" data-micromodal-close>Сгенерировать</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal micromodal-slide" id="modal-balance-3" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="m-modal modal__container" role="dialog" aria-modal="true">
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        <div class="m-modal__body">
+          <div class="m-modal-balance">
+            <form class="m-modal-balance__add" action="#">
+              <div class="m-modal-balance__add-card-list">
+                <div class="m-modal-balance__add-card">
+                  <div class="m-modal-balance__add-card-title">Сумма</div>
+                  <div class="m-modal-balance__add-card-amount">2.00 USDT</div>
+                </div>
+                <div class="m-modal-balance__add-card">
+                  <div class="m-modal-balance__add-card-title">Истечет</div>
+                  <div class="m-modal-balance__add-card-amount">21 Май 2022 17:33:20</div>
+                </div>
+              </div>
+              <div class="m-modal-balance__add-address">
+                <div class="m-modal-balance__add-address-title">Адрес</div>
+                <div class="m-modal-balance__add-address-text">Скопируйте USDT (TRC20)-адрес или QR-код ниже, чтобы пополнить баланс Coinmatics.</div>
+              </div>
+              <div class="m-modal-balance__add-code">
+                <div class="m-modal-balance__add-code-content">
+                  <div class="m-modal-balance__add-code-title">Адрес USDT (TRC20) кошелька</div>
+                  <div class="m-modal-balance__add-code-area">TJJRSScAJmcZiP9XUewycCY3xZgEL985SY</div>
+                  <button type="button" class="btn-secondary m-modal-balance__add-code-btn">Скопировать</button>
+                </div>
+                <div class="m-modal-balance__add-code-inner">
+                  <div class="m-modal-balance__add-code-inner-title">QR-код</div>
+                  <div class="m-modal-balance__add-code-inner-picture">
+                    <img src="./assets/img/qrcode.png">
+                  </div>
+                </div>
+              </div>
+              <div class="d-alert d-alert--qrcode m-modal-balance__add-alert">
+                <svg class="u-icon d-alert__icon"><use xlink:href="./assets/img/svg/sprite.svg#warning"></use></svg>
+                <div class="d-alert__text">Отправляйте только USDT через сеть Tron (TRC20). Если вы отправите другие монеты или токены, вы можете их потерять.</div>
+              </div>
+              <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+                <svg class="u-icon d-alert__icon"><use xlink:href="./assets/img/svg/sprite.svg#warning"></use></svg>
+                <div class="d-alert__text">Переводите только ту сумму, которую задали в данной форме. Отправка другой суммы приведет к задержке пополнения.</div>
+              </div>
+              <div class="m-modal-balance__add-footer">
+                <div class="m-modal-balance__add-footer-text">Среднее время обработки: 12 часов.</div>
+                <a href="https://coinmatics.zendesk.com/hc/ru/articles/360017040678-%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D1%8C-%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81-%D0%BD%D0%B0-Coinmatics" class="m-modal-balance__add-footer-link-moore" target="_blank">Нужна помощь?</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/micromodal.min.js"></script>
+  <script src="./assets/js/account.js"></script>
+</body>
+
+</html>

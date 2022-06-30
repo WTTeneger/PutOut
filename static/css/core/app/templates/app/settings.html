@@ -1,0 +1,484 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/flag/css/template.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/general-page.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/flag/css/flag-icon.css' %}" type="text/css">
+<script src="{% static '/js/tblock.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript" lang="javascript">
+    // Функция очистки класса
+    function cleanSelect (select) {
+        // Очищаем от стилей
+        return $(select).removeClass('icon-ok').removeClass('icon-error')
+    }
+
+    // Формируем select и его обработчики
+    function formSelect() {
+        // получаем выпадающий список с уже очищенными классами
+        var select = cleanSelect('.select-events');
+
+        // Добавляем класс, который соответствует выбранному элементу
+        select.addClass(select.val() == '1' ? 'icon-ok' : 'icon-error');
+
+        // Добавляем стили, чтобы у списка не было видно полосы прокрутки
+        select.css({ height: 'auto', overflow: 'hidden', zIndex: '40000' });
+
+        // Определяем обработчик на событие ухода мышки с области элемента
+        select.on('mouseleave', function () {
+            // Устанавливаем обычный размер
+            this.size = 1;
+            // Добавляем класс стиля в соответствии с выбранным элементом
+            cleanSelect(this).addClass($(this).val() == '1' ? 'icon-ok' : 'icon-error');
+        });
+
+        // Определяем обработчик на событие ухода мышки с области элемента
+        select.on('mouseover', function () {
+            // Очищаем стиль списка, чтобы он не мешал отображению
+            cleanSelect(this);
+            // Устанавливаем размер, равный количеству элементов
+            this.size = $(this).find('option').length;
+        });
+    }
+
+    // После загрузки DOM - получаем список
+    $(function () {
+        formSelect();
+    });
+
+</script>
+<main class="page-account__main general-page-main">
+
+  <div class="general-page-main__header">
+    <div class="container-account">
+      <h1 class="u-title general-page-main__title">{% trans "Настройки пользователя" %}</h1>
+      <div class="u-subtitle general-page-main__subtitle">{% trans "Ваши пользовательские настройки, биржевые аккаунты, аккаунты в Telegram" %}
+      </div>
+      <ul class="js-tab-nav tab-nav general-page-main__tab-nav">
+        <li data-target="tab-settings" class="tab-nav__item is-active">{% trans "Настройки" %}</li>
+        <li data-target="tab-telegram" class="tab-nav__item">{% translate "Аккаунты в Telegram" %} </li>
+        <li data-target="tab-subscriptions" class="tab-nav__item">{% trans "Подписки" %}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="general-page-main__body">
+    <div class="container-account">
+      <div class="js-tab-content tab-content">
+        <div id="tab-settings" class="tab-content__item">
+          <div class="account-settings">
+            <div class="row account-settings__row">
+              <div class="col-7 account-settings__col account-settings__col--general">
+                <div class="block-card account-settings__block-card">
+                  <div class="block-card__title">{% trans "Общие" %}</div>
+                  <div class="row block-card__group-row">
+                    <div class="col-6 block-card__col block-card__col--input">
+                      <div class="input-el">
+                        <label for="s1" class="input-el__label">{% trans "Имя пользователя" %}</label>
+                        <div class="input-el__wrapper input-el__wrapper_active" data-micromodal-trigger="modal-change-username">
+                          <input disabled type="text" class="u-input input-el__area" name="login" id="s1" value="{{ username }}">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 block-card__col block-card__col--input">
+                      <div class="input-el">
+                        <label for="select-2" class="input-el__label">{% trans "Язык" %}</label>
+                        <div class="input-el__wrapper">
+
+                          <div class="custom-select input-el__area">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <select onchange='location.href = location.origin + this.value' name="select"
+                                    class="custom-select__select-default" id="select-2">
+                              {% for lang in languages %}
+                              {{lang.1}}
+
+                              <option {% if LANGUAGE_CODE == lang.0 %} selected {%endif%}
+                                value="{% url 'addChangeLanguage' lang.0 %}">
+<!--                                class="flag-icon flag-icon-{{lang.0}}">-->
+                                {% language lang.0 %}
+                                  {% trans lang.1 %}
+                                {% endlanguage %}
+                              </option>
+                              {% endfor %}
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="custom-select__arrow">
+                              <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 block-card__col block-card__col--input">
+                      <div class="input-el">
+                        <label for="s3" class="input-el__label">{% trans "Электронная почта" %}</label>
+                        <div class="input-el__wrapper">
+                          <input type="text" class="u-input input-el__area" name="email" id="s3" disabled value="{{ mail }}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 account-settings__col account-settings__col--security">
+                <div class="block-card account-settings__block-card">
+                  <div class="block-card__title">{% trans "Безопасность" %}</div>
+                  <div class="block-card__line">
+                    <div class="block-card__line-content">
+                      <div class="block-card__line-title">{% trans "Пароль для входа" %}</div>
+                      <div class="block-card__line-subtitle">{% trans "Добавлен" %}</div>
+                    </div>
+
+                    <button type="button" data-micromodal-trigger="modal-change-password"
+                            class="btn-secondary block-card__line-btn">{% trans "Сменить" %}
+                    </button>
+                  </div>
+                  <div class="block-card__line">
+                    <div class="block-card__line-content">
+                      <div class="block-card__line-title">{% trans "Двухфакторная аутентификация" %}</div>
+                      {% if TwoFA and TwoFA.verificated %}
+                      <div class="block-card__line-subtitle block-card__line-subtitle--green">{% trans "Включена" %}</div>
+                      {% else %}
+                      <div class="block-card__line-subtitle block-card__line-subtitle--red">{% trans "Выключена" %}</div>
+                      {% endif %}
+                    </div>
+                    {% if TwoFA.verificated %}
+                    <button to-url={% url 'app2FA' %} style='' type="button" class="btn-default btn-default_bad block-card__line-btn">
+                    {% trans "Выключить" %}
+                    </button>
+                    {% else %}
+                    <button to-url={% url 'app2FA' %} type="button" class="btn-default block-card__line-btn">
+                    {% trans "Включить" %}
+                    </button>
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-telegram" class="tab-content__item" style="display: none;" >
+          <div class="account-settings">
+            <div class="row account-settings__row">
+              <div class="col-6 account-settings__col account-settings__col--general
+                    {% if telegram_alert %}{% else%}d-table__row--disabled{%endif%}">
+                <div class="block-card account-settings__block-card">
+                  <div class="block-card__title">{% trans "Уведомления о тикерах" %}
+                    <div to-send="{% url 'appTelegramAlertSwitch' %}" switch-btn='1'
+                         style="width: 82px; height: 38px; pointer-events: auto;"
+                         class="switch-btn {% if telegram_alert %}switch-on{% else%}{%endif%}"></div>
+                  </div>
+
+                  <button to-url="{% url 'appTGKeys' %}" type="button" class="btn-default block-card__btn-telegram">
+                    {% trans "Добавить аккаунт" %}
+                  </button>
+                  <div class="d-table d-balance__table-el" style="margin-top: 10px">
+                    <div class="d-table__row d-table__row--header">
+                      <div class="d-table__row-col">
+                        <div class="d-table__row-col-inner">{% trans 'Название интеграции' %}</div>
+                      </div>
+                      <div class="d-table__row-col">
+                        <div class="d-table__row-col-inner">{% trans 'Идентификатор' %}</div>
+                      </div>
+                    </div>
+                    {% for el in tg %}
+                    <div id_tg="{{el.tg_token}}" delete_tg="{{el.id}}" style="position: relative;"
+                         class="btn-fr-remove">
+                      <div class="d-table__row d-table__row--body">
+                        <div class="d-table__row-col" data-table-title="{% trans 'Название интеграции' %}">
+                          <div class="d-table__row-col-inner"> {{el.title}}</div>
+                        </div>
+                        <div class="d-table__row-col" data-table-title="{% trans 'Идентификатор' %}">
+                          <div class="d-table__row-col-inner">{{el.tg_token}}</div>
+                        </div>
+                      </div>
+                      <div class="unselectable btn-remove">
+                        <div class=''>{% trans 'Удалить' %}</div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 account-settings__col account-settings__col--security">
+                <div class="block-card account-settings__block-card">
+                  <div class="block-card__title">{% trans "Копитрейдинг" %}</div>
+                  <button type="button" class="btn-default block-card__btn-telegram">{% trans "Добавить аккаунт" %}
+                  </button>
+                  <div class="d-table d-balance__table-el" style="margin-top: 10px">
+                    <div class="d-table__row d-table__row--header">
+                      <div class="d-table__row-col">
+                        <div class="d-table__row-col-inner">{% trans 'Название интеграции' %}</div>
+                      </div>
+                      <div class="d-table__row-col">
+                        <div class="d-table__row-col-inner">{% trans 'Идентификатор' %}</div>
+                      </div>
+                    </div>
+                    {% for el in tg_N %}
+                    <div id="tg_{{el.id}}"
+                         class="d-table__row d-table__row--body">
+                      <div class="d-table__row-col" data-table-title="{% trans 'Название интеграции' %}">
+                        <div class="d-table__row-col-inner"> {{el.title}}</div>
+                      </div>
+                      <div class="d-table__row-col" data-table-title="{% trans 'Идентификатор' %}">
+                        <div class="d-table__row-col-inner">{{el.tg_token}}</div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-subscriptions" class="tab-content__item" style="display: none;">
+          <div class="account-settings">
+            <div class="d-table d-balance__table-el">
+              <div class="d-table__row d-table__row--header">
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">{% trans 'Дата подписки' %}</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">{% trans 'Тип' %}</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">{% trans 'Продукт' %}</div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__row-col-inner">{% trans 'Дата окончания' %}</div>
+                  </div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__row-col-inner">{% trans 'Процент копирования' %}</div>
+                  </div>
+                </div>
+                <div class="d-table__row-col">
+                  <div class="d-table__row-col-inner">
+                    <div class="d-table__row-col-inner">Активна</div>
+                  </div>
+                </div>
+              </div>
+              {% comment %} Строки таблицы {% endcomment %}
+
+              {% for el in subscriptions %}
+              <div class="d-table__row d-table__row--body {% if el.active == False %} d-table__row--disabled {% endif %}">
+                <div class="d-table__row-col" data-table-title="{% trans 'Дата начала' %}">
+                  <div class="d-table__row-col-inner">{{el.data_start}}</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="{% trans 'Тип подписки' %}">
+                  <div class="d-table__row-col-inner">{{el.type}}</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="{% trans 'Продукт' %}">
+                  <div to-url="{% url 'appStrategyId' el.product.id %}" class="d-table__row-col-inner urls_s">
+                    {{el.product}}
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="{% trans 'Дата завершения' %}">
+                  <div class="d-table__row-col-inner">{{el.data_end}}</div>
+                </div>
+                <div class="d-table__row-col" data-table-title="{% trans 'Дата завершения' %}">
+                  <div class="d-table__row-col-inner" style="display: flex; justify-content: flex-end;">
+                    <input onchange="change_percent(this)" type="number"
+                           id="{{el.id}}"
+                           min="10" max="500"
+                           class="u-input input-el__area" name="login" id="s1"
+                           style="max-width: 200px; text-align: center" value="{{el.percent}}">
+                  </div>
+                </div>
+                <div class="d-table__row-col" data-table-title="{% trans 'Активна' %}">
+                  <div class="d-table__row-col-inner">
+                    <div to-send="{% url 'appStrategySwitchStatus' el.id %}" switch-btn='1'
+                         style="width: 63px; height: 31px; pointer-events: auto;"
+                         class="switch-btn {% if el.active %}switch-on{% endif %}"></div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="row account-settings__row">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-change-password" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal__title">{% trans "Смена пароля" %}</div>
+        <form method="post" action="{% url 'appSettings' %}" class="modal__form">
+          {% csrf_token %}
+          <div class="errornote">
+            {% for err in PC_form.non_field_errors %}
+              <p style="color:red;">{{ err }}</p>
+            {% endfor %}
+            {% if PC_form.errors %}
+              <script>              
+                  let atributes = 'modal-change-password'
+                  let elem = document.getElementById(atributes)
+                  open_micro_modal = elem
+                  elem.classList.add('is-open')
+              </script>
+            {% endif %}
+          </div>
+          <div class="input-user-pass m-modal__form-line">
+            <div class="input-user-pass__header">
+              <label for="user-pass-1">{% trans "Текущий пароль" %}</label>
+            </div>
+            <div class="input-user-pass__input-wrapper">
+              {{ PC_form.old_password }}
+              <button type="button" data-btn-pass="1" aria-label="Toggle password visibility">
+                <svg class="input-user-pass__svg-show-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                          d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                  </path>
+                </svg>
+                <svg class="input-user-pass__svg-hide-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                          d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                  </path>
+                  <path
+                          d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                  </path>
+                  <path
+                          d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="input-user-pass m-modal__form-line">
+            <div class="input-user-pass__header">
+              <label for="user-pass-2">{% trans "Новый пароль" %}</label>
+            </div>
+            <div class="input-user-pass__input-wrapper">
+              {{ PC_form.new_password }}
+              <button type="button" data-btn-pass="2" aria-label="Toggle password visibility">
+                <svg class="input-user-pass__svg-show-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                          d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                  </path>
+                </svg>
+                <svg class="input-user-pass__svg-hide-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                          d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                  </path>
+                  <path
+                          d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                  </path>
+                  <path
+                          d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="input-user-pass m-modal__form-line">
+            <div class="input-user-pass__header">
+              <label for="user-pass-3">{% trans "Подтвердите новый пароль" %}</label>
+            </div>
+            <div class="input-user-pass__input-wrapper">
+              {{ PC_form.confirm_new_password }}
+              <button type="button" data-btn-pass="3" aria-label="Toggle password visibility">
+                <svg class="input-user-pass__svg-show-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                          d="M16 6c-6.979 0-13.028 4.064-16 10 2.972 5.936 9.021 10 16 10s13.027-4.064 16-10c-2.972-5.936-9.021-10-16-10zM23.889 11.303c1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697 1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 4.418 3.582 8 8 8s8-3.582 8-8c0-0.962-0.17-1.883-0.482-2.737 0.124 0.074 0.248 0.15 0.371 0.228v0zM16 13c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z">
+                  </path>
+                </svg>
+                <svg class="input-user-pass__svg-hide-pass" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                          d="M29.561 0.439c-0.586-0.586-1.535-0.586-2.121 0l-6.318 6.318c-1.623-0.492-3.342-0.757-5.122-0.757-6.979 0-13.028 4.064-16 10 1.285 2.566 3.145 4.782 5.407 6.472l-4.968 4.968c-0.586 0.586-0.586 1.535 0 2.121 0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439l27-27c0.586-0.586 0.586-1.536 0-2.121zM13 10c1.32 0 2.44 0.853 2.841 2.037l-3.804 3.804c-1.184-0.401-2.037-1.521-2.037-2.841 0-1.657 1.343-3 3-3zM3.441 16c1.197-1.891 2.79-3.498 4.67-4.697 0.122-0.078 0.246-0.154 0.371-0.228-0.311 0.854-0.482 1.776-0.482 2.737 0 1.715 0.54 3.304 1.459 4.607l-1.904 1.904c-1.639-1.151-3.038-2.621-4.114-4.323z">
+                  </path>
+                  <path
+                          d="M24 13.813c0-0.849-0.133-1.667-0.378-2.434l-10.056 10.056c0.768 0.245 1.586 0.378 2.435 0.378 4.418 0 8-3.582 8-8z">
+                  </path>
+                  <path
+                          d="M25.938 9.062l-2.168 2.168c0.040 0.025 0.079 0.049 0.118 0.074 1.88 1.199 3.473 2.805 4.67 4.697-1.197 1.891-2.79 3.498-4.67 4.697-2.362 1.507-5.090 2.303-7.889 2.303-1.208 0-2.403-0.149-3.561-0.439l-2.403 2.403c1.866 0.671 3.873 1.036 5.964 1.036 6.978 0 13.027-4.064 16-10-1.407-2.81-3.504-5.2-6.062-6.938z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" name="password-change" class="btn-default m-modal__form-btn">{% trans "Сменить" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-change-username" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div class="m-modal__title">{% trans "Смена" %} Username</div>
+        <form action="{% url 'appSettings' %}" method="post" class="modal__form">
+          {% csrf_token %}
+          <div class="input-user-pass m-modal__form-line">
+            <div class="input-user-pass__header">
+              <label for="user-pass-1">Username</label>
+            </div>
+            <div class="input-user-pass__input-wrapper">
+                {{ UNC_form.login }}
+              {% comment %} <input class="input-text-default" type="text" name="change-username" id="user-login"
+                                   placeholder="Текущий ник"> {% endcomment %}
+            </div>
+          </div>
+          <button type="submit" name="change-username" class="btn-default m-modal__form-btn">{% trans "Сменить" %}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-remove-tg" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div style="display: flex;" class="m-modal__title">{% trans "Удалить" %} <h2 style="margin-left: 10px;" id ='tgg'></h2></div>
+        <form action="{% url 'appSettings' %}" method="post" class="modal__form">
+          {% csrf_token %}
+          <div class="input-user-pass m-modal__form-line">
+            <div class="input-user-pass__header">
+              <h1 id="ttext">Username</h1>
+            </div>
+          </div>
+          <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+            <img src="{% static 'img/svg/warning.svg' %}" class="u-icon d-alert__icon">
+
+            <div class="d-alert__text">После удаление вы не сможете получать на него наши уведомления.
+            </div>
+          </div>
+          <button to-url="{% url 'appSettings' %}" id="buttremtg" type="button" name="change-username" class="btn-default m-modal__form-btn btn-remover">
+            {% trans "Удалить" %}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/sign-in.js' %}"></script>
+{% endblock %}

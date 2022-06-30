@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyTrade</title>
+  <link rel="icon" href="./favicon.ico">
+  <link href="./assets/css/variables.css" rel="stylesheet">
+  <link href="./assets/css/catalog-page.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="page-account">
+    <aside class="page-account__aside account-aside" id="account-aside" data-aside>
+      <a href="#" class="account-aside__logo">
+        <img src="./assets/img/logo/logo.svg" alt="Lucky Trade Logo">
+      </a>
+      <nav class="account-aside__nav aside-nav">
+        <ul class="aside-nav__list">
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link aside-nav__link_active">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="22.5px" height="21.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.882,1.488 L14.284,1.488 L14.284,13.413 L1.882,13.413 L1.882,1.488 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M7.882,7.488 L20.283,7.488 L20.283,19.413 L7.882,19.413 L7.882,7.488 Z" />
+              </svg>
+              Courses
+            </a>
+          </li>
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="19.5px" height="19.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.307,1.195 L16.31,1.195 L16.31,15.919 L1.307,15.919 L1.307,1.195 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M3.147,3.36 L17.871,3.36 L17.871,17.759 L3.147,17.759 L3.147,3.36 Z" />
+              </svg>
+              Copy Trading
+            </a>
+          </li>
+          <li class="aside-nav__item">
+            <a href="#" class="aside-nav__link">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="20.5px" height="19.5px">
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,1.647 L18.277,1.647 L18.277,5.76 L1.134,5.76 L1.134,1.647 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,7.647 L18.277,7.647 L18.277,11.76 L1.134,11.76 L1.134,7.647 Z" />
+                <path fill-rule="evenodd" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+                  d="M1.134,13.647 L18.277,13.647 L18.277,17.76 L1.134,17.76 L1.134,13.647 Z" />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <header class="page-account__header account-header">
+      <button class="account-header__btn-nav-toggle hamburger hamburger_type2" aria-label="Toggle aside"
+        aria-expanded="false" aria-controls="account-aside" type="button" data-btn-aside-toggle>
+        <span class="hamburger-box" aria-hidden="true">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <div class="account-header__balance user-balance">
+        <p class="user-balance__label">LuckyTrade Balance</p>
+        <p class="user-balance__value">137.026 USD</p>
+      </div>
+      <div class="dropdown account-header__dropdown-user dropdown-user" data-dropdown>
+        <button class="dropdown__btn" data-dropdown-btn>
+          <div class="dropdown-user__photo">
+            <img src="./assets/img/user.png" alt="User Photo">
+          </div>
+          <span class="dropdown-user__name">UserName661</span>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+            <path fill-rule="evenodd" d="M0.0,0.947 L6.149,7.96 L12.298,0.947 L0.0,0.947 Z" />
+          </svg>
+        </button>
+        <div class="dropdown__drop">
+          <ul class="dropdown-user__links">
+            <li><a href="#">Настройки</a></li>
+            <li><a href="#">Выйти</a></li>
+            <li><a href="#">...</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="page-account__main">
+      <section class="section-catalog-info">
+        <div class="section-catalog-info__logo">
+          <img src="./assets/img/logo/logo-small.svg" alt="Lucky Trade Logo">
+        </div>
+        <div class="section-catalog-info__info">
+          <h1 class="section-catalog-info__title">Copy Trading</h1>
+          <p class="section-catalog-info__text">Follow the strategy to start copying its deals.</p>
+        </div>
+      </section>
+      <section class="section-top-strategies">
+        <h2 class="section-top-strategies__title">Top Strategies</h2>
+        <div class="section-top-strategies__top-strategies-wrapper">
+          <ul class="section-top-strategies__top-strategies top-strategies">
+            <li class="top-strategies__item">
+              <p class="top-strategies__verification">Verified Trader</p>
+              <h3 class="top-strategies__title">
+                <img src="./assets/img/icons/checkmark-2.svg" alt="Checkmark Icon">
+                Daddy Trading
+              </h3>
+              <ul class="top-strategies__info">
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Exchange</p>
+                  <p class="top-strategies__info-value">
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Base Coin</p>
+                  <p class="top-strategies__info-value">
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Lifetime Profit</p>
+                  <p class="top-strategies__info-value top-strategies__info-value_num">+261.00%</p>
+                </li>
+              </ul>
+              <div class="top-strategies__chart" data-chart-top-strategies></div>
+              <ul class="top-strategies__info">
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Risk</p>
+                  <p class="top-strategies__info-value">2.1</p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Type</p>
+                  <p class="top-strategies__info-value">Spot</p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Rating</p>
+                  <p class="top-strategies__info-value top-strategies__info-value_num">
+                    <img src="./assets/img/icons/crown.png" alt="Crown">
+                    8.9
+                  </p>
+                </li>
+              </ul>
+            </li>
+            <li class="top-strategies__item">
+              <p class="top-strategies__verification">Verified Trader</p>
+              <h3 class="top-strategies__title">
+                <img src="./assets/img/icons/checkmark-2.svg" alt="Checkmark Icon">
+                Daddy Trading
+              </h3>
+              <ul class="top-strategies__info">
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Exchange</p>
+                  <p class="top-strategies__info-value">
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Base Coin</p>
+                  <p class="top-strategies__info-value">
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Lifetime Profit</p>
+                  <p class="top-strategies__info-value top-strategies__info-value_num">+261.00%</p>
+                </li>
+              </ul>
+              <div class="top-strategies__chart" data-chart-top-strategies></div>
+              <ul class="top-strategies__info">
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Risk</p>
+                  <p class="top-strategies__info-value">2.1</p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Type</p>
+                  <p class="top-strategies__info-value">Spot</p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Rating</p>
+                  <p class="top-strategies__info-value top-strategies__info-value_num">
+                    <img src="./assets/img/icons/crown.png" alt="Crown">
+                    8.9
+                  </p>
+                </li>
+              </ul>
+            </li>
+            <li class="top-strategies__item">
+              <p class="top-strategies__verification">Verified Trader</p>
+              <h3 class="top-strategies__title">
+                <img src="./assets/img/icons/checkmark-2.svg" alt="Checkmark Icon">
+                Daddy Trading
+              </h3>
+              <ul class="top-strategies__info">
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Exchange</p>
+                  <p class="top-strategies__info-value">
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Base Coin</p>
+                  <p class="top-strategies__info-value">
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Lifetime Profit</p>
+                  <p class="top-strategies__info-value top-strategies__info-value_num">+261.00%</p>
+                </li>
+              </ul>
+              <div class="top-strategies__chart" data-chart-top-strategies></div>
+              <ul class="top-strategies__info">
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Risk</p>
+                  <p class="top-strategies__info-value">2.1</p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Type</p>
+                  <p class="top-strategies__info-value">Spot</p>
+                </li>
+                <li class="top-strategies__info-item">
+                  <p class="top-strategies__info-name">Rating</p>
+                  <p class="top-strategies__info-value top-strategies__info-value_num">
+                    <img src="./assets/img/icons/crown.png" alt="Crown">
+                    8.9
+                  </p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="section-all-strategies">
+        <div class="section-all-strategies__header">
+          <h2 class="section-all-strategies__title">All Strategies</h2>
+          <div class="section-all-strategies__filters-wrapper">
+            <ul class="section-all-strategies__filters-list">
+              <li class="section-all-strategies__filter">
+                <label for="select-sorting-order">Sorting Order</label>
+                <div class="custom-select">
+                  <select name="select" class="custom-select__select-default" id="select-sorting-order">
+                    <option value="value1">Most signals first</option>
+                    <option value="value2">1</option>
+                    <option value="value2">2</option>
+                    <option value="value2">3</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </li>
+              <li class="section-all-strategies__filter">
+                <label for="select-exchange">Exchange</label>
+                <div class="custom-select">
+                  <select name="select" class="custom-select__select-default" id="select-exchange">
+                    <option value="value1">All</option>
+                    <option value="value2">1</option>
+                    <option value="value2">2</option>
+                    <option value="value2">3</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </li>
+              <li class="section-all-strategies__filter">
+                <label for="select-type">Type</label>
+                <div class="custom-select">
+                  <select name="select" class="custom-select__select-default" id="select-type">
+                    <option value="value1">All types</option>
+                    <option value="value2">1</option>
+                    <option value="value2">2</option>
+                    <option value="value2">3</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </li>
+              <li class="section-all-strategies__filter">
+                <label for="select-strategies-per-page">Strategies per page</label>
+                <div class="custom-select">
+                  <select name="select" class="custom-select__select-default" id="select-strategies-per-page">
+                    <option value="value1">10</option>
+                    <option value="value2">1</option>
+                    <option value="value2">2</option>
+                    <option value="value2">3</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </li>
+              <li class="section-all-strategies__filter">
+                <label for="select-period">Period</label>
+                <div class="custom-select">
+                  <select name="select" class="custom-select__select-default" id="select-period">
+                    <option value="value1">3 Months</option>
+                    <option value="value2">1</option>
+                    <option value="value2">2</option>
+                    <option value="value2">3</option>
+                  </select>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    class="custom-select__arrow">
+                    <path fill-rule="evenodd" d="M0.0,0.0 L6.727,6.727 L13.454,0.0 L0.0,0.0 Z" />
+                  </svg>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="section-all-strategies__table-wrapper">
+          <table class="section-all-strategies__table-strategies table-strategies">
+            <thead>
+              <tr>
+                <td>Strategy</td>
+                <td>Rating</td>
+                <td>Exchange</td>
+                <td>Type</td>
+                <td>Base Coin</td>
+                <td>Strategy Balance</td>
+                <td>Risk</td>
+                <td>Copy Trading</td>
+                <td>Signals</td>
+                <td>Strategy</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/checkmark.svg" alt="Checkmark Icon">
+                    ALBERT-TRADER TETHERON
+                  </div>
+                </td>
+                <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </div>
+                </td>
+                <td>Spot</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </div>
+                </td>
+                <td>1364 USDT</td>
+                <td>2.2</td>
+                <td>140.00 USDT</td>
+                <td>140.00 USDT</td>
+                <td class="table-strategies__cell-chart">
+                  <div>
+                    10.1%
+                    <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/checkmark.svg" alt="Checkmark Icon">
+                    ALBERT-TRADER TETHERON
+                  </div>
+                </td>
+                <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </div>
+                </td>
+                <td>Spot</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </div>
+                </td>
+                <td>1364 USDT</td>
+                <td>2.2</td>
+                <td>140.00 USDT</td>
+                <td>140.00 USDT</td>
+                <td class="table-strategies__cell-chart">
+                  <div>
+                    10.1%
+                    <div data-chart-all-strategies="red" class="table-strategies__chart"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/checkmark.svg" alt="Checkmark Icon">
+                    ALBERT-TRADER TETHERON
+                  </div>
+                </td>
+                <td class="table-strategies__color-yellow table-strategies__value">9.1</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </div>
+                </td>
+                <td>Spot</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </div>
+                </td>
+                <td>1364 USDT</td>
+                <td>2.2</td>
+                <td>140.00 USDT</td>
+                <td>140.00 USDT</td>
+                <td class="table-strategies__cell-chart">
+                  <div>
+                    10.1%
+                    <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/checkmark.svg" alt="Checkmark Icon">
+                    ALBERT-TRADER TETHERON
+                  </div>
+                </td>
+                <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </div>
+                </td>
+                <td>Spot</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </div>
+                </td>
+                <td>1364 USDT</td>
+                <td>2.2</td>
+                <td>140.00 USDT</td>
+                <td>140.00 USDT</td>
+                <td class="table-strategies__cell-chart">
+                  <div>
+                    10.1%
+                    <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/checkmark.svg" alt="Checkmark Icon">
+                    ALBERT-TRADER TETHERON
+                  </div>
+                </td>
+                <td class="table-strategies__color-green table-strategies__value">9.1</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/binance-2.svg" alt="Binance logo">
+                    BINANCE
+                  </div>
+                </td>
+                <td>Spot</td>
+                <td>
+                  <div>
+                    <img src="./assets/img/icons/usdt.svg" alt="USDT logo">
+                    USDT
+                  </div>
+                </td>
+                <td>1364 USDT</td>
+                <td>2.2</td>
+                <td>140.00 USDT</td>
+                <td>140.00 USDT</td>
+                <td class="table-strategies__cell-chart">
+                  <div>
+                    10.1%
+                    <div data-chart-all-strategies="green" class="table-strategies__chart"></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-all-strategies__pagination-wrapper">
+          <div class="section-all-strategies__pagination">
+            <button aria-label="Previous strategies table page">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.93,0.624 L0.366,7.352 L7.93,14.79 L7.93,0.624 Z" />
+              </svg>
+            </button>
+            <p>1-5 of 77</p>
+            <button aria-label="Next strategies table page">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                <path fill-rule="evenodd" d="M0.593,0.493 L7.321,7.221 L0.593,13.948 L0.593,0.493 Z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./assets/js/account.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <script>
+    // Top strategies charts
+    (() => {
+      const data = [
+        [4, 6, 5, 6, 1, 5, 9, 8, 19],
+        [4, 4, 6, 3, 6, 7, 2, 4, 6],
+        [4, 5, 7, 1, 5, 3, 7, 4, 4]
+      ];
+
+      const chartConfig = {
+        chart: {
+          height: 160,
+          type: 'line',
+          parentHeightOffset: 0,
+          toolbar: {
+            show: false
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 2
+        },
+        dataLabels: {
+          enabled: false
+        },
+        colors: ['#64fdec'],
+        grid: {
+          show: false,
+          padding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: -10
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+        xaxis: {
+          labels: {
+            show: false
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          tooltip: {
+            enabled: false
+          },
+        },
+        yaxis: {
+          labels: {
+            show: false
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          tooltip: {
+            enabled: false
+          },
+        }
+      };
+
+      const chartsTopStrategies = document.querySelectorAll('[data-chart-top-strategies]');
+
+      chartsTopStrategies.forEach((chart, i) => {
+        new ApexCharts(chart, {
+          ...chartConfig,
+          series: [{
+            data: data[i]
+          }]
+        }).render();
+      })
+    })();
+
+    // All strategies charts
+    (() => {
+      const data = [
+        [4, 35, 5, 56, 1],
+        [4, 43, 6, 35, 54],
+        [4, 34, 45, 65, 54],
+        [34, 35, 435, 56, 1],
+        [4, 35, 23, 53, 1]
+      ];
+
+      const chartConfig = {
+        chart: {
+          height: 80,
+          type: 'line',
+          parentHeightOffset: 0,
+          toolbar: {
+            show: false
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 2
+        },
+        dataLabels: {
+          enabled: false
+        },
+        grid: {
+          show: false,
+          padding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: -10
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+        xaxis: {
+          labels: {
+            show: false
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          tooltip: {
+            enabled: false
+          },
+        },
+        yaxis: {
+          labels: {
+            show: false
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          tooltip: {
+            enabled: false
+          },
+        }
+      };
+
+      const chartsTopStrategies = document.querySelectorAll('[data-chart-all-strategies]');
+
+      chartsTopStrategies.forEach((chart, i) => {
+        if (chart.dataset.chartAllStrategies === 'green') {
+          chartConfig.colors = ['#64fdec'];
+        }
+
+        if (chart.dataset.chartAllStrategies === 'red') {
+          chartConfig.colors = ['#fd6464'];
+        }
+
+        new ApexCharts(chart, {
+          ...chartConfig,
+          series: [{
+            data: data[i]
+          }]
+        }).render();
+      })
+    })();
+
+  </script>
+</body>
+
+</html>

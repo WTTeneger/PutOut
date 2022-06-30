@@ -1,0 +1,364 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load staticfiles %}
+{% load tag_library %}
+{% block title %}
+LuckyTrader - {% translate "Приборная панель" %}
+{% endblock %}
+
+{% block head %}
+<!--<link href="{% static 'css/general-page.css' %}" rel="stylesheet">-->
+<link href="{% static 'css/trade-page.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/general-page.css' %}" type="text/css">
+<script src="{% static '/js/tblock.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main trade-page-main">
+  <div class="trade-page-main__inner">
+    <div class="trade-page-main__col-left">
+      <a href="{% url 'appDashboard' %}" class="trade-page-main__btn-back btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path fill-rule="evenodd" d="M9.499,0.499 L0.499,9.499 L9.499,18.499 L9.499,0.499 Z"/>
+        </svg>
+        {% trans 'Назад' %}
+      </a>
+      <section class="section-trade-info">
+        <h1 class="section-trade-info__title">
+          <img src="{% static 'img/icons/checkmark.svg' %}" alt="Checkmark icon">
+          {{s.title}}
+        </h1>
+        <p class="section-trade-info__text">
+          {{s.descriptions}}
+        </p>
+      </section>
+      <section class="section-strategy-profit">
+        <h2 class="section-strategy-profit__title">{% trans 'Прибыль стратегии' %}</h2>
+        {% comment %}
+        <div class="section-strategy-profit__periods-wrapper">
+          <ul class="section-strategy-profit__periods-list">
+            <li class="section-strategy-profit__period">
+              <button>Day</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button class="active-period">Week</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>1 Month</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>3 Month</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>6 Month</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>Year</button>
+            </li>
+            <li class="section-strategy-profit__period">
+              <button>All Time</button>
+            </li>
+          </ul>
+        </div>
+        {% endcomment %}
+        <div class="section-strategy-profit__chart" data-chart-strategy-profit></div>
+      </section>
+      <section class="section-table">
+        <div class="section-table__inner">
+          <h2 class="section-table__title">{% trans 'История сигналов' %}</h2>
+          <div class="section-table__table-wrapper">
+            <table class="section-table__table-default table-default">
+              <thead>
+              <tr>
+                <td>{% trans 'Пара' %}</td>
+                <td>{% trans 'Тип' %}</td>
+                <td>{% trans 'Цена' %}</td>
+                <td class="table-default__text-center">%</td>
+                <td class="table-default__text-right">{% trans 'Дата создания' %}</td>
+                <td class="table-default__text-right">{% trans 'Дата завершения' %}</td>
+                <td class="table-default__text-right">{% trans 'Статус' %}</td>
+              </tr>
+              </thead>
+              <tbody>
+              {% for el in s.stats.all_orders %}
+              <tr>
+                <td>{{el.symbol}}</td>
+                <td>{{el.tp}}</td>
+                <td>{{el.start_price}}</td>
+                <td class="table-default__text-center">{{el.ROE}}%</td>
+                <td class="table-default__text-right">{{el.data}}</td>
+                <td class="table-default__text-right">{{el.data_end}}</td>
+                <td class="table-default__text-center">{{el.status}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <a href="#" class="section-table__link-all-history">View all history</a>
+        </div>
+      </section>
+    </div>
+    <div class="trade-page-main__col-right">
+      <section class="section-follow trade-page-main__section-follow">
+        <div class="section-follow__follow-cards-wrapper">
+          <ul class="follow-cards">
+            <li class="follow-cards__item">
+              <h2 class="follow-cards__title">{% trans 'Копирование сделок' %}</h2>
+              <p class="follow-cards__value">{{s.price}} USD</p>
+              <p class="follow-cards__text">{% trans 'На 30 дней' %}</p>
+              <button type="button" data-micromodal-trigger="modal-add-folowers"
+                      class="follow-cards__btn-follow btn-default {% if balance|addf:bonus_balance < s.price and not free_sub%}is-disabled{% endif %}">
+                {% trans 'Подписаться' %}
+              </button>
+            </li>
+            <li class="follow-cards__item">
+              <h2 class="follow-cards__title">{% trans 'Уведомления о сигналах в тг' %}</h2>
+              <p class="follow-cards__value">{% trans 'Бесплатно' %}</p>
+              <p class="follow-cards__text">{% trans 'Всегда' %}</p>
+              <button to-url="{% url 'appStrategyFollowId' 'tg' s.id %}"
+                      class="follow-cards__btn-follow btn-default">
+                {% if not s.stats.sub %}
+                {% trans 'Подписаться' %}
+                {% else %}
+                {% trans 'Отписаться' %}
+                {% endif %}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="section-trade-stats">
+        <div class="section-trade-stats__inner">
+          {% comment %}
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Требования к подписке' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans ' Minimum balance on Fiat and Spot required' %}</p>
+                <p class="section-trade-stats__value">140 USDT</p>
+              </li>
+            </ul>
+          </div>
+          {% endcomment %}
+
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Подробная информация' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Тип' %}</p>
+                <p class="section-trade-stats__value">{{s.type|upper}}</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Биржа' %}</p>
+                <p class="section-trade-stats__value">
+                  <img src="{% static 'img/icons/binance-2.svg' %}" alt="Binance logo">
+                  {{s.platforms.place|upper}}
+                </p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Основная монета' %}</p>
+                <p class="section-trade-stats__value">{{s.stats.main_symbol}}</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Риски' %} </p>
+                <p class="section-trade-stats__value
+                  {% if s.stats.risk >= 75 %}
+                  section-trade-stats__value_red
+                  {% elif s.stats.risk >= 35 %}
+                  section-trade-stats__value_yellow
+                  {% else %}
+                  section-trade-stats__value_green
+                  {% endif %}
+                  ">
+                  {{s.stats.risk}}%
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Подписчики' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Копирование сделок' %}</p>
+                <p class="section-trade-stats__value">{{s.stats.followers|lenght}}</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Сигналы' %}</p>
+                <p class="section-trade-stats__value">{{s.stats.sub|lenght}}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="section-trade-stats__block">
+            <h2 class="section-trade-stats__title">{% trans 'Базовая статистика' %}</h2>
+            <ul class="section-trade-stats__stats-list">
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Дней на бирже' %}</p>
+                <p class="section-trade-stats__value">{{s.stats.day_in_market}} Days</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Всего сигналов' %}</p>
+                <p class="section-trade-stats__value">{{s.stats.total_count}}</p>
+              </li>
+              <li>
+                <p class="section-trade-stats__name">{% trans 'Сигналов в день' %}</p>
+                <p class="section-trade-stats__value">{{s.stats.count_in_day}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="modal micromodal-slide" id="modal-add-folowers" aria-hidden="false">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="m-modal modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      <div class="m-modal__body">
+        <div style="display: flex;" class="m-modal__title">{% trans "Удалить" %} <h2 style="margin-left: 10px;" id ='tgg'></h2></div>
+        <form action="{% url 'appStrategyFollowId' 'copy' s.id %}" method="post" class="modal__form">
+          {% csrf_token %}
+          <div class="input-user-pass m-modal__form-line">
+            <div class="input-user-pass__header">
+              <h1 id="ttext">Username</h1>
+            </div>
+          </div>
+          <div class="d-alert d-alert--warning m-modal-balance__add-alert">
+            <img src="{% static 'img/svg/warning.svg' %}" class="u-icon d-alert__icon">
+
+            <div class="d-alert__text">После подписания с вашего счёта спишется {{price}}.
+            </div>
+          </div>
+          <button to-url="{% url 'appStrategyFollowId' 'copy' s.id %}" id="buttremtg" type="button" name="change-username" class="btn-default m-modal__form-btn btn-remover">
+            {% trans "Подписаться" %}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<script src="{% static 'js/tblock.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+  var dataSeries = [[
+    {% for el in s.stats.all_ROE_DATA %}
+    { 'data':{{ el.0}},
+      'value':{{el.1}}
+    },
+    {% endfor %}
+  ]]
+  console.log(dataSeries[0])
+  var id = 0
+  var ts2 = 1484418600000;
+  var ts2 = dataSeries[0][0].data - 26400000;
+  // console.log(ts2)
+  // var ts2 = dataSeries[0][0].data;
+  // console.log(ts2)
+  var dates = [];
+  var spikes = [5, -5, 3, -3, 8, -8]
+  var innerArr = [ts2, 0];
+  dates.push(innerArr)
+  for (var i = 0; i < dataSeries[0].length; i++) {
+    ts2 = ts2 + 86400000;
+    var innerArr = [dataSeries[0][i].data, dataSeries[0][i].value];
+    // var
+    // if   (ts2 == dataSeries[0][i].value){
+  dates.push(innerArr)
+    //   var innerArr = [ts2, 0];
+    // }else{
+    //   var innerArr = [ts2, 0];
+    // }
+  }
+
+
+  const chartsTopStrategies = document.querySelector('[data-chart-strategy-profit]');
+  var options = {
+    series: [{
+      name: "{% trans 'ROE за сделку'%}",
+      data: dates
+    }],
+    chart: {
+      type: 'area',
+      stacked: false,
+      height: 350,
+      zoom: {
+        type: 'x',
+        enabled: true,
+        autoScaleYaxis: true
+      },
+      toolbar: {
+        autoSelected: 'zoom'
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    markers: {
+      size: 4,
+    },
+    title: {
+      text: "{% trans 'движение ROE в'%} {{s.title}}",
+      align: 'left'
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 1,
+        inverseColors: false,
+        opacityFrom: 0.5,
+        opacityTo: 0,
+        colorStops: [
+                [
+                  {
+                    offset: 0,
+                    color: '#15CE299D',
+                    opacity: 1
+                  },
+                  {
+                    offset: 50,
+                    color: '#15CE299D',
+                    opacity: 0.8
+                  },
+                  {
+                    offset: 50,
+                    color: '#AD1717C0',
+                    opacity: 0.8
+                  },
+                  {
+                    offset: 100,
+                    color: '#AD1717C0',
+                    opacity: 1
+                  }
+                ],
+              ]
+        },
+    },
+    colors: ['#787777B2'],
+    yaxis: {
+      labels: {
+        formatter: function (val) {
+          return (val / 1).toFixed(2);
+        },
+      },
+      title: {
+        text: 'ROE'
+      },
+    },
+    xaxis: {
+      type: 'datetime',
+    },
+    tooltip: {
+      shared: false,
+      y: {
+        formatter: function (val) {
+          return (val / 1).toFixed(2)
+        }
+      }
+    }
+  };
+  var chart = new ApexCharts(chartsTopStrategies, options);
+  chart.render()
+</script>
+{% endblock %}

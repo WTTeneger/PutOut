@@ -1,0 +1,17 @@
+.btn-secondary {
+  min-height: 54px;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: 1px solid var(--app-color-green-13);
+  background-color: transparent;
+  color: var(--app-color-green-2);
+  font-size: var(--app-font-size-3);
+  line-height: 1.424;
+  text-align: center;
+  transition: color .1s ease-in-out, border-color .1s ease-in-out;
+
+  &:hover {
+    color: var(--app-color-yellow-1);
+    border-color: var(--app-color-yellow-1);
+  }
+}

@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    LuckyTrader - {% translate "История платежа" %}
+{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/welcome-page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="page-account__main">
+      <section class="section-welcome">
+        <div class="section-welcome__logo">
+          <img src="{% static 'img/logo-small.png' %}" alt="Lucky Trade Logo">
+        </div>
+        <div class="section-welcome__info">
+          <h1 class="section-welcome__title">{% translate header %}</h1>
+          <p class="section-welcome__text">
+            {% translate description %} Lucky Trade
+          </p>
+          <p class="section-welcome__label">{% translate "" %}</p>
+        </div>
+        <button to-url="{% url 'appDashboard' %}" class="btn-default rate-cards__btn-buy">{% translate "На главную" %}</button>
+      </section>
+    </main>
+{% endblock %}

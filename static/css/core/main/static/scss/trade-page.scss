@@ -1,0 +1,75 @@
+@import './partials/base.scss';
+@import './components/account-aside.scss';
+@import './components/account-header.scss';
+@import './components/UI/hamburger.scss';
+@import './components/UI/btn-back.scss';
+@import './components/UI/dropdown.scss';
+@import './components/UI/btn-default.scss';
+@import './components/sections/section-trade-info.scss';
+@import './components/sections/section-strategy-profit.scss';
+@import './components/sections/section-table.scss';
+@import './components/sections/section-trade-stats.scss';
+@import './components/sections/section-follow.scss';
+@import './components/UI/table-default.scss';
+
+.trade-page-main {
+
+  @include media-md {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: 1560px;
+    display: flex;
+    position: relative;
+    padding: 65px 0 100px 0;
+
+    @media screen and (max-width: 1400px) {
+      flex-direction: column;
+    }
+  }
+
+  &__btn-back {
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    transform: translateY(-50%)
+  }
+
+  &__col-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 8px;
+    overflow: hidden;
+
+    @media screen and (max-width: 1400px) {
+      margin-right: 0;
+      margin-bottom: 50px;
+    }
+  }
+
+  &__col-right {
+    width: 100%;
+    max-width: 465px;
+    min-width: 365px;
+
+    @media screen and (max-width: 1400px) {
+      max-width: 100%;
+      min-width: auto;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__section-follow {
+    margin-bottom: 8px;
+
+    @media screen and (max-width: 1400px) {
+      width: auto;
+      margin: 50px auto 0 auto;
+    }
+  }
+}

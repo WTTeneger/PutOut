@@ -1,0 +1,125 @@
+.section-partner-info {
+  display: flex;
+
+  @include media-lg {
+    flex-direction: column;
+  }
+
+  &__info {
+    width: 100%;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 8px;
+    padding: 40px 20px 40px 20px;
+    border-radius: 10px;
+    background-color: var(--app-color-grey-3);
+
+    @include media-lg {
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: var(--app-color-grey-4);
+    font-size: var(--app-font-size-7);
+    line-height: 1.424;
+    text-align: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      flex-shrink: 0;
+
+      @include media-sm {
+        display: none;
+      }
+    }
+  }
+
+  &__text {
+    width: 100%;
+    max-width: 870px;
+    color: var(--app-color-grey-4);
+    line-height: 1.424;
+    text-align: center;
+    font-size: var(--app-font-size-3);
+    font-weight: 300;
+  }
+
+  &__partner-link {
+    width: 100%;
+    max-width: 465px;
+    min-width: 365px;
+    min-height: 250px;
+
+    @include media-lg {
+      max-width: 100%;
+      min-width: auto;
+    }
+
+    @include media-sm {
+      min-height: 200px;
+    }
+  }
+}
+
+.partner-link {
+  display: flex;
+  padding: 30px 20px;
+  border-radius: 10px;
+  background-color: var(--app-color-green-7);
+
+  @include media-md {
+    padding: 20px 10px;
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: var(--app-font-size-3);
+    font-weight: 300;
+    color: var(--app-color-yellow-1);
+    line-height: 1.424;
+    text-align: center;
+  }
+
+  &__link {
+    margin: 10px 0;
+    color: var(--app-color-grey-3);
+    line-height: 1.424;
+    text-align: center;
+    font-size: var(--app-font-size-5);
+
+    &:hover {
+      color: var(--app-color-yellow-1);
+    }
+  }
+
+  &__btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      margin: 5px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+}

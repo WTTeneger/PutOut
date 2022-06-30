@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<!--Подключение библиотеки-->
+<script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
+
+<script>
+    //Инициализация виджета. Все параметры обязательные, кроме объекта customization.
+    const checkout = new window.YooMoneyCheckoutWidget({
+        confirmation_token: 'ct-2a02d49f-000f-5000-8000-145e57f39448', //Токен, который перед проведением оплаты нужно получить от ЮKassa
+        return_url: 'http://127.0.0.1:8000/ru/a/payment/', //Ссылка на страницу завершения оплаты
+
+        //Настройка виджета
+        customization: {
+            //Настройка способа отображения
+            modal: true
+        },
+
+        error_callback: function (error) {
+            //Обработка ошибок инициализации
+        }
+    });
+
+    //Отображение платежной формы в модальном окне
+    checkout.render()
+        //Метод возвращает Promise, исполнение которого говорит о полной загрузке платежной формы (можно не использовать).
+        .then(() => {
+            //Код, который нужно выполнить после отображения платежной формы.
+        });
+</script>
+</html>
