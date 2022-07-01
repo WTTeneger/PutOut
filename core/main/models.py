@@ -121,30 +121,30 @@ class Stats(models.Model):
         ('client', 'Клиент'),
     )
     # Профиль
-    finishedGame = models.IntegerField(verbose_name=l_('Оконченных игр'))
-    takedMoney = models.IntegerField(verbose_name=l_('Собранно монет'))
-    mostTotalCharacters = models.IntegerField(verbose_name=l_('Самая большая толпа'))
-    mostTotalCountMoneyInGame = models.IntegerField(
+    finishedGame = models.IntegerField(default=0, verbose_name=l_('Оконченных игр'))
+    takedMoney = models.IntegerField(default=0, verbose_name=l_('Собранно монет'))
+    mostTotalCharacters = models.IntegerField(default=0, verbose_name=l_('Самая большая толпа'))
+    mostTotalCountMoneyInGame = models.IntegerField(default=0, 
         verbose_name=l_('Самое большое колличество собранных монет за игру'))
-    mostTotalCountMoney = models.IntegerField(verbose_name=l_('Самое большое колличество собранных монет за игру'))
-    totalKilometers = models.FloatField(verbose_name=l_('Пройдено киллометров'))
-    pedestriansEaten = models.IntegerField(verbose_name=l_('Съедено прохожих'))
-    timeSpent = models.IntegerField(verbose_name=l_('Проведено времени'))
+    mostTotalCountMoney = models.IntegerField(default=0, verbose_name=l_('Самое большое колличество собранных монет за игру'))
+    totalKilometers = models.FloatField(default=0, verbose_name=l_('Пройдено киллометров'))
+    pedestriansEaten = models.IntegerField(default=0, verbose_name=l_('Съедено прохожих'))
+    timeSpent = models.IntegerField(default=0, verbose_name=l_('Проведено времени'))
 
     # Смерть 1 персонажа
-    byCar = models.IntegerField(verbose_name=l_('Умер от машин'))
-    byHelicopter = models.IntegerField(verbose_name=l_('Умер от вертолетов'))
-    byHole = models.IntegerField(verbose_name=l_('Умер от ям'))
-    byScrolling = models.IntegerField(verbose_name=l_('Умер от пролистывания'))
-    byGroundBomb = models.IntegerField(verbose_name=l_('Умер от наземных бомб'))
-    byAerialBomb = models.IntegerField(verbose_name=l_('Умер от воздушных бомб'))
+    byCar = models.IntegerField(default=0, verbose_name=l_('Умер от машин'))
+    byHelicopter = models.IntegerField(default=0, verbose_name=l_('Умер от вертолетов'))
+    byHole = models.IntegerField(default=0, verbose_name=l_('Умер от ям'))
+    byScrolling = models.IntegerField(default=0, verbose_name=l_('Умер от пролистывания'))
+    byGroundBomb = models.IntegerField(default=0, verbose_name=l_('Умер от наземных бомб'))
+    byAerialBomb = models.IntegerField(default=0, verbose_name=l_('Умер от воздушных бомб'))
 
     # Игра закончена по причине
-    byAerialBomb = models.IntegerField(verbose_name=l_('Умер от воздушных бомб'))
+    byAerialBomb = models.IntegerField(default=0, verbose_name=l_('Умер от воздушных бомб'))
 
     # Полученные бонусы
-    bonusNinja = models.IntegerField(verbose_name=l_('Ниндзя'))
-    bonusDragon = models.IntegerField(verbose_name=l_('Ниндзя'))
+    bonusNinja = models.IntegerField(default=0, verbose_name=l_('Ниндзя'))
+    bonusDragon = models.IntegerField(default=0, verbose_name=l_('Ниндзя'))
 
     def __str__(self):
         return 'Статистика №{}'.format(self.id)
@@ -173,7 +173,7 @@ class Item(models.Model):
     title = models.CharField(max_length=200, verbose_name=l_('Название предмета'))
     description = models.CharField(max_length=200, verbose_name=l_('Описание'))
     rarity = models.CharField(max_length=200, choices=_RARITY_ITEM, verbose_name=l_('Типы предметов'))
-    endurance = models.IntegerField(verbose_name=l_('Прочность'))
+    endurance = models.IntegerField(default=0, verbose_name=l_('Прочность'))
     image = models.CharField(max_length=255, verbose_name=l_('Изображение'))
     owner = models.ForeignKey('UserData', on_delete=models.SET(''), blank=True, null=True, verbose_name=l_('Владелец'))
 
