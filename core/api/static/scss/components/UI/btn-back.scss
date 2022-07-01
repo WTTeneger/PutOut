@@ -1,0 +1,22 @@
+.btn-back {
+  display: flex;
+  align-items: center;
+  color: var(--app-color-grey-1);
+  font-size: var(--app-font-size-1);
+
+  &:hover {
+    color: var(--app-color-green-1);
+
+    svg {
+      fill: var(--app-color-green-1);
+    }
+  }
+
+  svg {
+    width: 10px;
+    height: 19px;
+    flex-shrink: 0;
+    margin-right: 15px;
+    fill: var(--app-color-grey-1);
+  }
+}

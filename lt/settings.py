@@ -72,7 +72,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'core.main',
-    # 'core.api',
+    'core.api',
     # 'core.app',
     'admin_reorder',
 ]

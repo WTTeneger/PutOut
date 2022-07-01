@@ -32,6 +32,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('', include('core.main.urls')),
+    path('api/', include('core.api.urls')),
     # path('app/', include('core.app.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
 

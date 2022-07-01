@@ -1,0 +1,37 @@
+.btn-default {
+  min-height: 54px;
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 15px;
+  background-image: linear-gradient(124deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 0%, #ad814c 0%, #e9d494);
+  color: #fff;
+  font-size: var(--app-font-size-3);
+  line-height: 1.424;
+  text-align: center;
+  transition: none;
+  overflow: hidden;
+  z-index: 1;
+  transition: color .1s ease-in-out;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(-124deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 0%, rgb(81, 231, 204) 0%, rgb(55, 173, 157) 100%);
+    z-index: -1;
+    opacity: 1;
+    transition: opacity .1s ease-in-out;
+  }
+
+  &:hover {
+    color: var(--app-color-grey-5);
+    text-shadow: 0 0 2px #e4cc8b;
+
+    &::before {
+      opacity: 0;
+    }
+  }
+}

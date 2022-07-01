@@ -1,0 +1,89 @@
+// Partials
+@import './fonts';
+@import './reset';
+@import './media-queries';
+@import './mixins';
+
+body {
+  min-width: 320px;
+  color: var(--app-color-grey-16);
+  font-family: 'HelveticaNeueCyr', sans-serif;
+  font-weight: 300;
+  font-size: var(--app-font-size-3);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__header {}
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  &__footer {}
+}
+
+.wrapper {
+  width: 100%;
+  max-width: calc(1460px + var(--app-side-padding) + var(--app-side-padding));
+  margin: 0 auto;
+  padding-left: var(--app-side-padding);
+  padding-right: var(--app-side-padding);
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  opacity: 0.45;
+  background-color: rgb(33, 33, 33);
+  z-index: 8888;
+}
+
+.page-account {
+  &__aside {}
+
+  &__header {}
+
+  &__main {
+    min-height: calc(100vh - var(--app-account-header-height));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: var(--app-account-header-height);
+    margin-left: var(--app-account-aside-width);
+    padding: 60px var(--app-side-padding);
+
+    @include media-xl {
+      margin-left: 0;
+    }
+  }
+}
+
+// Transitions
+button,
+a {
+  transition: color .1s ease-in-out, background-color .1s ease-in-out, opacity .1s ease-in-out;
+}
+
+svg {
+  transition: fill .1s ease-in-out, stroke .1s ease-in-out;
+}
+
+// Focus Visible
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+* {
+  &:focus {
+    outline: var(--app-color-green-13) solid 1px;
+  }
+}
