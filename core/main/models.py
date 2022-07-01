@@ -120,8 +120,31 @@ class Stats(models.Model):
     ACCOUNT_TYPE = (
         ('client', 'Клиент'),
     )
-    dayInGame = models.IntegerField(verbose_name=l_('Дней в игре'))
-    lastUpdate = models.DateTimeField(verbose_name=l_('Дата последнего захода'))
+    # Профиль
+    finishedGame = models.IntegerField(verbose_name=l_('Оконченных игр'))
+    takedMoney = models.IntegerField(verbose_name=l_('Собранно монет'))
+    mostTotalCharacters = models.IntegerField(verbose_name=l_('Самая большая толпа'))
+    mostTotalCountMoneyInGame = models.IntegerField(
+        verbose_name=l_('Самое большое колличество собранных монет за игру'))
+    mostTotalCountMoney = models.IntegerField(verbose_name=l_('Самое большое колличество собранных монет за игру'))
+    totalKilometers = models.FloatField(verbose_name=l_('Пройдено киллометров'))
+    pedestriansEaten = models.IntegerField(verbose_name=l_('Съедено прохожих'))
+    timeSpent = models.IntegerField(verbose_name=l_('Проведено времени'))
+
+    # Смерть 1 персонажа
+    byCar = models.IntegerField(verbose_name=l_('Умер от машин'))
+    byHelicopter = models.IntegerField(verbose_name=l_('Умер от вертолетов'))
+    byHole = models.IntegerField(verbose_name=l_('Умер от ям'))
+    byScrolling = models.IntegerField(verbose_name=l_('Умер от пролистывания'))
+    byGroundBomb = models.IntegerField(verbose_name=l_('Умер от наземных бомб'))
+    byAerialBomb = models.IntegerField(verbose_name=l_('Умер от воздушных бомб'))
+
+    # Игра закончена по причине
+    byAerialBomb = models.IntegerField(verbose_name=l_('Умер от воздушных бомб'))
+
+    # Полученные бонусы
+    bonusNinja = models.IntegerField(verbose_name=l_('Ниндзя'))
+    bonusDragon = models.IntegerField(verbose_name=l_('Ниндзя'))
 
     def __str__(self):
         return 'Статистика №{}'.format(self.id)
